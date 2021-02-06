@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+	물건정보 : <input type="text" name="data01" /><br>
+	가격정보 : <input type="text" name="data02" />
+	<input type="button" value="등록" onclick="addData()"/><br>
+	<table id="tab">
+		<tr><th>물건명</th><th>가격</th>
+	</table>
+</body>
+<script type="text/javascript">
+function addData(){
+
+	var pname = document.querySelector("[name=data01]").value;
+	var prices = document.querySelector("[name=data02]").value;
+	var list01 = pname.split("^");
+	var list02 = prices.split(",");
+	var addTab = "";
+	list01.forEach(function(ele,idx){
+		addTab += "<tr><td>"+ ele + "</td><td>" + list02[idx] + "</td></tr>"
+	});
+	document.querySelector("#tab").innerHTML += addTab;
+}
+</script>

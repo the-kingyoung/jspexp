@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+//
+
+</script>
+</head>
+<body>
+	<table width="300" height="300" align="center" style="text-align:center;" border>
+		<tr><th>이름</th><td></td></tr>
+		<tr><th>분야</th><td></td></tr>
+		<tr><th>나이</th><td></td></tr>
+	</table>
+</body>
+<script type="text/javascript">
+/* 
+[js]
+[하] 1. json객체의 메서드 속성에 대하여 기술하세요.
+	- 속성에 할당되는 값이 function(){}이면 함수로 사용된다. 
+
+[하] 2. json형식으로 좋아하는 연예인 이름 분야 나이, showConsole(), showTable() 로 해서 
+		console에 출력하는 것과 화면 DOM에 테이블로 출력하는 것을 처리하세요.
+*/
+
+	var tdObj = document.querySelectorAll("td");
+	var favEnter = {
+		name : "@@@",
+		field : "@@",
+		age : 0,
+		showConsole : function(name, field, age) {
+			if (name != null)
+				this.name = name;
+			if (field != null)
+				this.field = field;
+			if (age != null)
+				this.age = age;
+			console.log("#좋아하는 연예인#");
+			console.log("이름 : " + name + "\n분야 : " + field + "\n나이 : " + age);
+		},
+		showTable : function(name, field, age) {
+			if (name != null)
+				this.name = name;
+			if (field != null)
+				this.field = field;
+			if (age != null)
+				this.age = age;
+				tdObj[0].innerHTML=name;
+				tdObj[1].innerHTML=field;
+				tdObj[2].innerHTML=age;
+		}
+	}
+	favEnter.showConsole("아이유", "가수", 29);
+	favEnter.showTable("박규영", "배우", 29);
+</script>

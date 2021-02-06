@@ -1,0 +1,51 @@
+# jsp에서 database 연동 처리..
+1. 처리구조
+	client ==> 웹어플리케이션 서버 ==> DB server
+	ex) 특정한 로그인페이지를 서버에 요청하면(url)
+		서버는 로그인화면을 전송한다.
+		클라이언트는 id, pass를 입력하고 다시 submit를 통해서 
+		서버에 특정한 페이지(action)에 요청값 id=@@&pass=@@로 요청한다.
+		서버에서는 request객체로 요청값을 받아,
+			DAO라는 기능 객체를 통해서 
+			DB서버에 접속 후(기능메서드1) - jdbc드라이버를 통해서
+				ip, port, sid, 계정/비번 접속 처리.
+			매개변수를 통해서 id,pass전달 후 데이터 확인(기능 메서드2)
+				sql과 Statement객체, ResultSet객체를 통해서 결과를 가져온다.
+				public boolean hasMember(String id, String pass){}
+			response 객체를 통해서 해당 id,pass통해 DB 데이터가 있는지 여부를
+			client로 전달한다.
+
+2. jsp에 처리 내용
+	1) 요청값 받기
+	2) DAO 선언
+		- 연결처리
+		- 연결후 결과 데이터 받는 기능메서드 구현.
+	3) 받은 결과 데이터(VO/ArrayList<VO>)를 화면에 출력.
+3. 핵심적 knowledge map
+	1) database처리를 위해 java는 환경을 구성하여야 하는가 ?
+	2) database처리에 필요한 정보는 무엇이고 java는 api에 어떤 객체와 메서드를 통해서 처리하는가 ?
+	3) database의 여러가지 기능별로 처리하는 순서 이해하기
+	4) 요청값과 DB를 통해서 받은 데이터를 화면에 어떻게 구현이 되는가?
+	5) DB를 처리하는 요구사항에 의해서 화면구현, DB 객체 처리,
+		jsp를 통해 DB에서 받은 데이터 출력 처리를 효과적인 순서를 통해서 처리한다.
+
+4. 기능 처리..
+	1) java라는 환경 구성
+		- DB 서버 구축, 계정 생성, 사용할 DB테이블 생성 데이터 입력
+			sql확인을 통해서 데이터 정상 확인.
+		- jdbc 드라이버 설정 : WebContent\WEB-INF\lib\ojdbc6.jar
+			sql전송 이외에 모든 기능을 구현함. 개발자는 최소한 코드로 
+			db서버에 접속해서 사용할 수 있도록 만들어 놓았다.
+		- DB 접속정보 확인 
+			ip, port, sid, 계정명, 비밀번호
+	2) java는 database 처리 api
+		- Connection : 접속을 해주는 객체
+		- Statement/PreparedStatement
+			 : sql을 이용해서 server에 명령어를 전송
+		- ResultSet : 데이터를 받는 처리하는 객체 (2차원테이블 구조와 동일)
+			: select(필요),
+				insert, update, delete(필요X) - commit(), rollback()
+		- 접속해제메서드 .close()
+		- 예외처리(SQLException)을 반드시 처리하여야 한다.
+		
+			
