@@ -38,7 +38,7 @@ String path = request.getContextPath();
 </script>
 </head>
 <%--
-session이 없을 때, session값 없습니다. 로그인 페이지 이동 메시지 표기.
+	session이 없을 때, session값 없습니다. 로그인 페이지 이동 메시지 표기.
 	페이지를 호출할 때 마다 point1 씩 증가..
 	id : @@@ point:@@@
 	[로그아웃 클릭] ==> session 종료 페이지 이동

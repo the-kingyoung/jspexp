@@ -17,6 +17,9 @@ String path = request.getContextPath();
 
 </style>
 <script>
+alert('로그인 실패 \n로그인 페이지 이동');
+location.href="a05_0205Answer.jsp";		//초기 페이지로 이동
+
 	window.onload=function(){
 
 	};
@@ -24,18 +27,10 @@ String path = request.getContextPath();
 </head>
 
 <body>
-<%
-ArrayList<Person> plist = (ArrayList<Person>)session.getAttribute("plist");
-%>
-	<h3>리스트 session 데이터 확인</h3>
+	<h3>로그인 실패</h3>
 	<table>
-		<tr><th>이름</th><th>나이</th><th>사는곳</th></tr>
-		<%for(Person p:plist){ %>
-		<tr><td><%=p.getName() %></td>
-			<td><%=p.getAge() %></td>
-			<td><%=p.getLoc() %></td></tr>
-			<%} %>
+		<tr><th>타이틀</th></tr>
+		<tr><td>내용</td></tr>
 	</table>
-	<h4 onclick="location.href='a03_session_info.jsp'">세션 정보 확인.</h4>
 </body>
 </html>

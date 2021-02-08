@@ -45,7 +45,7 @@ String path = request.getContextPath();
 		- 특정 유효기간으로 종료 setMaxInactiveInterval(초단위);
 	2) web.xml 설정으로 처리
 		<session-confing>
-			<session-timeout>30</session-timeout>
+			<session-timeout>30</session-timeout>(분단위)
  --%>
 <body>
 <%

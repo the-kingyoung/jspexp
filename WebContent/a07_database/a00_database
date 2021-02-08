@@ -47,5 +47,82 @@
 				insert, update, delete(필요X) - commit(), rollback()
 		- 접속해제메서드 .close()
 		- 예외처리(SQLException)을 반드시 처리하여야 한다.
+
+5. 조회 처리..
+	1) sql를 사용해서 조회 확인.
+		select * from emp;
+		select * from emp e, dept d
+		where e.deptno = d.deptno;
+		select * from member
+		where id = @@@ and pass = @@@;
+		select * from emp
+		where ename like '%?%'...;
+			사원명 [	][검색]
+			...
+			...
+			...
+		
+		
+		
+	2) 결과를 확인해서 단위 데이터 VO(value object)를 작성한다.
+		emp의 조회결과의 단위 데이터를 class Emp{ private in empno...}
+		단위 데이터를 통해서 DB에서 데이터를 입력된 결과를 받아, 화면에서 처리할 수 있다.
+		
+	3) DAO 작성
+		- connection 처리
+		- 조회기능 메서드 선언 VO, ArrayList<VO> 리턴값 선언,
+			메서드명 매개변수 객체나 문자열을 입력받게 구조를 만든다.
+			public ArrayList<Emp> elist(String ename,VO...){
+				
+				return empList;
+		
+			}
+		- 조회기능 메서드 안에서 처리할 내용
+			1. 공통연결메서드 호출
+			2. Statement 객체 생성.(연결객체 - Connection)
+			3. ResultSet 객체 생성.(대화객체 - Statement)
+				-next() : 행단위 변경
+				-getXXX("컬럼명") : 열단위 호출.
+				==> 1개의 데이터인 경우 : VO(단일)
+				==> 다중의 행단위 여러 데이터인 경우 : ArrayList<VO>
+				마지막에 객체의 참조변수를 return;
+			4. 자원의 해제..
+			5. 예외 처리..
+			
+	4) jsp 화면에서 DAO 객체 호출, 기능 메서드에 요청값 처리로 매개변수로 객체 전달,
+		return 객체를 이용하여, 반복문을 통해서 화면에 처리..
+		ex ) 
+		VO : 테이블의 컬럼명이 아니라 sql을 통해서 나타나는 타이틀명/데이터 타입을 기준으로 
+			vo class의 속성명을 정한다.
+			empno number ==> private int empno;
+			ename varchar ==> private String ename;
+			job varchar2 ==> private String job;
+			*/
+			SELECT empno||'-'||ename info, ''||sal salary
+			FROM emp;
+					
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 			

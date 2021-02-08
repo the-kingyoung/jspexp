@@ -16,7 +16,13 @@ String path = request.getContextPath();
 <style>
 
 </style>
+<%
+	session.invalidate();
+%>
 <script>
+	alert("로그아웃 되었습니다.");
+	location.href="a05_0205Answer.jsp"
+
 	window.onload=function(){
 
 	};
@@ -24,18 +30,10 @@ String path = request.getContextPath();
 </head>
 
 <body>
-<%
-ArrayList<Person> plist = (ArrayList<Person>)session.getAttribute("plist");
-%>
-	<h3>리스트 session 데이터 확인</h3>
+	<h3>제목</h3>
 	<table>
-		<tr><th>이름</th><th>나이</th><th>사는곳</th></tr>
-		<%for(Person p:plist){ %>
-		<tr><td><%=p.getName() %></td>
-			<td><%=p.getAge() %></td>
-			<td><%=p.getLoc() %></td></tr>
-			<%} %>
+		<tr><th>타이틀</th></tr>
+		<tr><td>내용</td></tr>
 	</table>
-	<h4 onclick="location.href='a03_session_info.jsp'">세션 정보 확인.</h4>
 </body>
 </html>

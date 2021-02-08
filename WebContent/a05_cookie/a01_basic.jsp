@@ -29,6 +29,9 @@ String path = request.getContextPath();
 	1) 브라우저를 통해, 서버에 접속 후 어떤 데이터가 다시 접속할 때 필요할까 ?
 	2) 특정한 데이터는 서버에 남는것이 더 좋을까? 클라이언트(브라우저)에 남는 것이 더 좋을까?
 	
+	클라이언트에 저장한다? - 쿠키
+	
+	
 2. 학습목표
 	브라우저에 저장되는 데이터에 대한 이해를 한다.
 	쿠키 데이터의 저장 형식과 저장 주기를 안다.
@@ -37,10 +40,13 @@ String path = request.getContextPath();
 3. 주요 키워드
 	Cookie, getName, getValue(), request.getCookies()
 	response.addCookie(), Cookie.setMaxAge()
-# 쿠키(Cookie)
+	
+# 쿠키(Cookie)=======================================================================================================
 1. 쿠키는 웹브라우저가 보관하고 있는 데이터로서 웹 서버에 요청을 보낼 때 함께 전송한다.
 	1) 쿠키의 생성은 웹서버에서 시작되고, response객체에 
 		쿠키생성할 것을 탑재하여 클라이언트에 보낸다.
+		response.addCookie(new Cookie(key,value));
+		
 	2) 클라이언트는 사용하는 브라우저를 통해, 쿠키값을 받아
 		특정한 쿠키저장소에 저장한다.
 		브라우저에 배열형태로 누적되어 저장 Cookie[]
@@ -59,7 +65,7 @@ String path = request.getContextPath();
 	4) $로 시작할 수 없다.
 	
 3. 쿠키의 생성과 읽기
-	1) Cookie c01 = new Cookie("쿠키의 이름","쿠키의 값");
+	1) Cookie c01 = new Cookie("쿠키의 이름","쿠키의 값");==============>핵심
 	2) response.addCookie(co01); //서버가 클라이언트에 전달
 	3) Cookie[] cookies=request.getCookies()
 		클라이언트에서 전달된 쿠키를 서버가 request 객체를 통해서 확인한다.
@@ -83,7 +89,7 @@ String path = request.getContextPath();
 		URLEncoder.encode("쿠키설정key나 값","utf-8")
 		를 통해서 encode를 처리 후, 
 		ex) new Cookie ( URLEncoder.encode("홍길동","utf-8"),
-						 URLEncoder.encode("서울신림동","utf-8"));
+						 URLEncoder.encode("서울신림동","utf-8"));		<==utf-8은 default값
  --%>
 <body>
 <%--쿠키의 생성!! --%>
