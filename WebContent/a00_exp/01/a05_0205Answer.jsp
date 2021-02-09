@@ -36,7 +36,7 @@ String path = request.getContextPath();
 # 처리순서
 1. 화면 구현  
 
-2. submit 후, 요청값에 대한 처리..
+2. submit 후, 요청값에 대한 처리..	//아이디랑 비번을 입력후 로그인 버튼을 누른다.
 	String id = request.getParameter("id");
 	System.out.println(id); 	// 프로세스 잘 진행되고 있는가? (에러 체크랄까.....)
 
@@ -44,7 +44,7 @@ String path = request.getContextPath();
 	if(id.equals("himan")&&pass.equals("7777")){
 		
 		1)선택1
-		session.setAttribute("id",id);
+		ssesion.setAttribute("id",id);
 		session.setAttribute("pass",pass);
 		System.out.println(id);
 		//위 or 아래 둘 중 하나만 사용하면 됩니다.

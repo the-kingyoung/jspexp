@@ -10,6 +10,11 @@ public class Member {
 		
 		this.point = point;
 	}
+	public Member(String id, String pass) {
+		super();
+		this.id = id;
+		this.pass = pass;
+	}
 	public String getId() {
 		return id;
 	}
@@ -17,11 +22,6 @@ public class Member {
 		return pass;
 	}
 	public void setPass(String pass) {
-		this.pass = pass;
-	}
-	public Member(String id, String pass) {
-		super();
-		this.id = id;
 		this.pass = pass;
 	}
 	public void setId(String id) {

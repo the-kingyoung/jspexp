@@ -8,6 +8,13 @@ public class Dept {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public Dept(String dname, String loc) {
+		super();
+		this.dname = dname;
+		this.loc = loc;
+	}
+
+
 	public Dept(int deptno, String dname, String loc) {
 		super();
 		this.deptno = deptno;
