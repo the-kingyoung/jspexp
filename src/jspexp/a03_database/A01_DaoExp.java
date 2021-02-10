@@ -71,7 +71,8 @@ public class A01_DaoExp {				//DAO : Database Access Object
 		}
 		return list;
 	}
-//=======================================================================================
+//======================================================================================================================================	
+
 	public ArrayList<Dept> deptlist(){
 		ArrayList<Dept> dlist = new ArrayList<Dept>();
 		try {
@@ -100,8 +101,8 @@ public class A01_DaoExp {				//DAO : Database Access Object
 			System.out.println(e.getMessage());
 		}
 		return dlist;
+//======================================================================================================================================	
 	}
-//=======================================================================================
 	public ArrayList<Dept> deptList(Dept sch){
 		ArrayList<Dept> dlist = new ArrayList<Dept>();
 		
@@ -133,7 +134,7 @@ public class A01_DaoExp {				//DAO : Database Access Object
 		}
 		return dlist;
 	}
-	
+//======================================================================================================================================	
 	
 	
 	

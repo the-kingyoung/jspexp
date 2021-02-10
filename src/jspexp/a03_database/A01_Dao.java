@@ -1,15 +1,18 @@
 package jspexp.a03_database;
-
+//jspexp.a03_database.A01_Dao
 import java.sql.*;
 
 
+
 import java.util.ArrayList;
+import java.util.Date;
 
 import jspexp.z01_vo.Dept;
 import jspexp.z01_vo.Emp;
 import jspexp.z01_vo.Emp3;
 import jspexp.z01_vo.Emp4;
 import jspexp.z01_vo.Emp5;
+import jspexp.z01_vo.Member5;
 import jspexp.z01_vo.jobSalary;
 
 
@@ -76,7 +79,7 @@ public class A01_Dao {   //DAO : database access object
       try {
          setCon();
       // 2. Statement 객체 생성 (연결객체 - Connection)
-         String sql = "select * from emp";
+         String sql = "select * from emp2";
          stmt = con.createStatement();
       // 3. ResultSet 객체 생성 (대화객체 - Statement)
          rs = stmt.executeQuery(sql);
@@ -164,9 +167,10 @@ public class A01_Dao {   //DAO : database access object
          setCon();
       // 2. Statement 객체 생성 (연결객체 - Connection)
          String sql = "	SELECT *\r\n"
-         		+ "	FROM EMP e\r\n"
+         		+ "	from emp2 e\r\n"
          		+ "	WHERE ename like '%'||upper('"+ ename+"')||'%'\r\n"
-         		+ "	AND job LIKE '%'||upper('"+job+"')||'%'";
+         		+ "	AND job LIKE '%'||upper('"+job+"')||'%'"
+         		+ " ORDER BY empno desc";
          stmt = con.createStatement();
       // 3. ResultSet 객체 생성 (대화객체 - Statement)
          rs = stmt.executeQuery(sql);
@@ -176,7 +180,7 @@ public class A01_Dao {   //DAO : database access object
       // 1행의 데이터를 사용할 준비
          System.out.println("1행 1열: " + rs.getInt(1));
          System.out.println("1행 2열: " + rs.getString(2));
-         //rs.get데이터 유형(컬럼의 순서)
+      // rs.get데이터 유형(컬럼의 순서)
          System.out.println(rs.next());
       // 2행의 데이터가 있는지 여부 확인
       // 2행의 데이터를 사용할 준비
@@ -242,14 +246,14 @@ public class A01_Dao {   //DAO : database access object
    }
 
 // ex) Dept를 조회하는 메서드를 선언하세요 Dept VO객체 활용
-   // ex)select * from dept; 처리
+   // ex)select * from dept2; 처리
    public ArrayList<Dept> deptList(){
       ArrayList<Dept> dlist = new ArrayList<Dept>();
       // 1. 연결
       try {
     	setCon();  
       // 2. 대화
-    	String sql = "select * from dept";
+    	String sql = "select * from dept2";
     	stmt = con.createStatement();
       // 3. 결과
     	rs=stmt.executeQuery(sql);
@@ -282,7 +286,7 @@ public class A01_Dao {   //DAO : database access object
 		   setCon();
 	   //2. 대화  sql
 		   String sql="SELECT * \r\n"
-		   		+ "FROM dept\r\n"
+		   		+ "from dept2\r\n"
 		   		+ "WHERE dname LIKE '%'||'"+sch.getDname()+"'||'%'\r\n"
 		   		+ "AND loc LIKE '%'||'"+sch.getLoc()+"'||'%'";
 		   stmt = con.createStatement();
@@ -319,7 +323,7 @@ public class A01_Dao {   //DAO : database access object
 		   //2, 대화
 		   String sql="select job, count(*) 사원수,\r\n"
 		   		+ "round(avg(sal)) avgsal\r\n"
-		   		+ "from emp e\r\n"
+		   		+ "from emp2 e\r\n"
 		   		+ "group by job\r\n"
 		   		+ "having round(avg(sal))>=2000\r\n"
 		   		+ "order by job";
@@ -347,12 +351,6 @@ public class A01_Dao {   //DAO : database access object
    
    
    
-   
-   // ex) select * from emp where empno=7780 (empno는 유일키) 처리 메서드
-   public Emp getEmp(int empno) {
-      Emp e = null;
-      return e;
-   }
    
    /*
    public Emp getEmp2(ArrayList<Emp> a) {
@@ -440,14 +438,185 @@ public class A01_Dao {   //DAO : database access object
    // ex) emp5
    //public ArrayList<Emp5> elist2(int part){
 
+// ex) emp5
+   //public ArrayList<Emp5> elist2(int part){
+
+// 조회 처리 메서드.. (매개변수 없는 처리)
+   public ArrayList<Member5> memberList(String id, String name){
+      ArrayList<Member5> list = new ArrayList<Member5>();
+      // 1. 공통메서드 호출
+      try {
+         setCon();
+      // 2. Statement 객체 생성 (연결객체 - Connection)
+         String sql = "	SELECT * \r\n"
+         		+ "FROM member5\r\n"
+         		+ "WHERE id LIKE '%'||'"+ id +"'||'%'\r\n"
+         		+ "AND name LIKE '%'||'"+name+"'||'%'";
+         stmt = con.createStatement();
+      // 3. ResultSet 객체 생성 (대화객체 - Statement)
+         rs = stmt.executeQuery(sql);
+         while(rs.next()) {
+
+		 Member5 m =new Member5(	rs.getString(1), 
+				 					rs.getString(2),rs.getString(3),
+									rs.getInt(4), rs.getString(5), 
+									rs.getDate(6), rs.getString(7));
+        	 //2. ArrayList에 할당.
+        	 list.add(m);     	 
+         }
+         System.out.println("데이터 건수 : "+list.size());
+         System.out.println("두번째행 : "+list.get(1).getName());
+         //ex1) deptList() 기능메서드를 통해 ArrayList<Dept>데이터를 담아서
+         //		데이터 건수와 두번째 부서이름을 출력하세요..
+//         Dept d = new Dept(rs.getInt(0),rs.getString(1),rs.getString(2));
+//         dlist.add(d);
+//     	}
+//     	System.out.println("객체의 갯수 : "+dlist.size());
+//     	System.out.println("두번째 부서 이름 : "+ dlist.get(1).getDeptno());
+         
+      // 4. 자원의 해제
+         rs.close();
+         stmt.close();
+         con.close();
+      // 5. 예외 처리
+      } catch (SQLException e1) {
+         // TODO Auto-generated catch block
+         e1.printStackTrace();
+         System.out.println(e1.getMessage());
+      }catch(Exception e) {
+    	  System.out.println(e.getMessage());
+      }
+
+      String info = "jdbc:oracle:thin:@localhost:1521:xe";
+      try {
+         con = DriverManager.getConnection(info, "scott", "tiger");
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      System.out.println("접속 성공");
+      
+      return list;
+   }
+   /*
+    INSERT INTO emp2 values(
+	emp21_seq.nextval,'홍길동','사원',7780,
+	to_date('2021/05/01','YYYY/MM/DD'),
+	3500,100,10)
+    */
+   public void insertEmp(Emp ins) {
+	   //1. 접속 autocommit(false)
+	   try {
+		   setCon();
+		   //2. 대화
+		   stmt = con.createStatement();
+		   String sql = "    INSERT INTO emp2 values(\r\n"
+		   		+ "	emp21_seq.nextval,'"+ins.getEname()+"','"+ins.getJob()
+		   		+"',"+ins.getMgr()+",\r\n"
+		   		+ "	to_date('"+ins.getHiredate_s()+"','YYYY/MM/DD'),\r\n"
+		   		+ "	"+ins.getSal()+","+ins.getComm()+","+ins.getDeptno()+")";
+		   System.out.println("###");
+		   System.out.println(sql);
+		   stmt.executeUpdate(sql);
+		   con.commit();
+		   stmt.close();
+		   con.close();
+		   //3. commit
+		   //4. 예외처리
+	} catch (SQLException e) {
+		// TODO: handle exception
+		e.printStackTrace();
+		System.out.println("db 처리 에러");
+		try {
+			con.rollback();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}catch(Exception e) {
+		System.out.println("일반에러");
+	}
+}
+
+   /*
+    INSERT INTO dept2 values(
+	10,'ACCOUNT','NEW YORK')
+    */
+   public void insertDept(Dept ins) {
+	   //1. 접속 autocommit(false)
+	   try {
+		   setCon();
+		   //2. 대화
+		   stmt = con.createStatement();
+		   String sql = "    INSERT INTO dept2 values(\r\n"
+		   		+ "	'"+ins.getDeptno()+"','"+ins.getDname()+"','"+ins.getLoc()+"')";
+		   System.out.println("###");
+		   System.out.println(sql);
+		   stmt.executeUpdate(sql);
+		   con.commit();
+		   stmt.close();
+		   con.close();
+		   //3. commit
+		   //4. 예외처리
+	} catch (SQLException e) {
+		// TODO: handle exception
+		e.printStackTrace();
+		System.out.println("db 처리 에러");
+		try {
+			con.rollback();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}catch(Exception e) {
+		System.out.println("일반에러");
+	}
+}
+
+   //SELECT * FROM emp2 where empno=7369;
+   
+// ex) emp5
+   //public ArrayList<Emp5> elist2(int part){
+   public Emp getEmp(int empno){
+		Emp emp = null;
+		try {
+			setCon();
+			String sql = "SELECT * FROM emp2 WHERE empno = '"+empno+"'";
+			stmt = con.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				 emp = new Emp(rs.getInt(1),rs.getString(2),rs.getString(3), rs.getInt(4),rs.getString(5),rs.getDouble(6),rs.getDouble(7),rs.getInt(8));
+			}
+			
+			rs.close();
+			stmt.close();
+			con.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+			
+		return emp;
+	}
 public static void main(String[] args) {
       // TODO Auto-generated method stub
-      A01_Dao dao = new A01_Dao();
+//      A01_Dao dao = new A01_Dao();
+//      Emp ins = new Emp(0,"김길동4","대리",7800,"2010/12/12",4000,100,20);
+//      dao.insertEmp(ins);
+		
+		A01_Dao dao = new A01_Dao();
+		Dept ins = new Dept(10,"회계","서울 강남");
+		dao.insertDept(ins);
+      
+      
       //dao.empList();
       //dao.deptList();
      // dao.empList("","");
      //dao.deptList(new Dept("",""));
-      dao.jobSalList(0);
+      //dao.jobSalList(0);
+      //dao.memberList("", "");
    }
    
    //}
