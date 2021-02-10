@@ -14,11 +14,11 @@ import jspexp.z01_vo.Dept;
 public class A02_DeptDao {
 
 	//DAO : database access object
-	   // 1. 데이터베이스 연결 처리
+	   // 1. 데이터베이스 연결 처리		도로를 깔아주고
 	   private Connection con;
 	// 2. 대화
 	   private Statement stmt;
-	private PreparedStatement pstmt;
+	   private PreparedStatement pstmt;
 	// 3. 결과값 받는 객체
 	   private ResultSet rs;
 
@@ -31,7 +31,7 @@ public class A02_DeptDao {
 	         e.printStackTrace();
 	      }															//에러가 안나면 캐치문은 그냥 넘어감
 	      // 2. 특정 서버
-	      //      - 접속 정보 : 드라이버명:@ip:port:sid
+	      //      - 접속 정보 : 드라이버명:@ip:port:sid						뭘타고 갈건지 정해준다.
 	      String info = "jdbc:oracle:thin:@localhost:1521:xe";
 	      //드라이버 매니저 객체를 통해서 Connection객체를 생성 
 	      try {
@@ -86,7 +86,8 @@ public class A02_DeptDao {
 		   }
 		
 		   return dlist;
-	   }
+	   }	
+//=====================================================================================================================	
 	public void insertDept(Dept ins){
 		//연결
 		try {
@@ -114,9 +115,9 @@ public class A02_DeptDao {
 		}
 	}
 	
-	
+//=====================================================================================================================		
 public Dept getDept(int deptno) {
-	Dept dept = null;
+	Dept dept = null;														//지역변수를 초기화해주는것이다.
 	try {
 		setCon();
 		String sql = "SELECT * FROM DEPT10 WHERE deptno = '"+deptno+"'";
@@ -135,12 +136,7 @@ public Dept getDept(int deptno) {
 	}
 	return dept;
 }
-
-	
-	
-	
-	
-	
+//=====================================================================================================================	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A02_DeptDao dao = new A02_DeptDao();

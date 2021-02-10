@@ -32,6 +32,7 @@ public class A02_Dao {
          System.out.println(e.getMessage());
       }
    }
+//==========================================================================================================================
    public ArrayList<Member> getMemberList(){
       ArrayList<Member> mlist = null;
       
