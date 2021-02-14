@@ -25,6 +25,7 @@ String path = request.getContextPath();
 </head>
 <%--
 1. 화면구성
+
 2. sql작성
 	SELECT *
 	FROM EMP e
