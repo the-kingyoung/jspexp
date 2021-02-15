@@ -5,6 +5,7 @@ import java.sql.*;
 
 
 
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -49,7 +50,7 @@ public class A01_Dao {   //DAO : database access object
    }
 /*
 1. sql작성
-2. VO 객체 생성
+2. VO 객체 생성 : sql의 결과값에 따른 컬럼명과 type을 확인하여 작성.
 3. 기능 메서드 선언.
 	1) 요청에 의한 입력 : 매개변수로 활용.
 	2) 데이터의 결과에 따라 리턴값 지정.
@@ -224,6 +225,111 @@ public class A01_Dao {   //DAO : database access object
       // 4. 자원의 해제
          rs.close();
          stmt.close();
+         con.close();
+      // 5. 예외 처리
+      } catch (SQLException e1) {
+         // TODO Auto-generated catch block
+         e1.printStackTrace();
+         System.out.println(e1.getMessage());
+      }catch(Exception e) {
+    	  System.out.println(e.getMessage());
+      }
+
+      String info = "jdbc:oracle:thin:@localhost:1521:xe";
+      try {
+         con = DriverManager.getConnection(info, "scott", "tiger");
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      System.out.println("접속 성공");
+      
+      return list;
+   }
+
+// ex) emp5
+   //public ArrayList<Emp5> elist2(int part){
+/*
+# PreparedStatement 객체 활용하기.
+1. SQL의 틀을 미리 정해놓고, 나중에 값을 지정하는 방식.
+	select *
+	from emp
+	where ename like'%'||?||'%'
+	and job like '%'||?||'%'
+	pstmt.setString(1,"홍");	 ?의 순서 1부터 붙여서 사용한다.
+	pstmt.setString(2,"A");
+ 2. 왜 사용하는가 ?
+ 	1) sql injection을 막기위해 사용된다.
+ 	2) db 서버의 sql 해석 속도를 향상시켜 빠른 처리를 한다.
+ 	
+ */
+// 조회 처리 메서드.. (매개변수 없는 처리)
+   public ArrayList<Emp> empList2(String ename, String job){
+      ArrayList<Emp> list = new ArrayList<Emp>();
+      // 1. 공통메서드 호출
+      try {
+         setCon();
+      // 2. Statement 객체 생성 (연결객체 - Connection)
+         String sql = "	SELECT *\r\n"
+         		+ "	from emp2 e\r\n"
+         		+ "	WHERE ename like '%'||upper( ? )||'%'\r\n"
+         		+ "	AND job LIKE '%'||upper( ? )||'%'"
+         		+ " ORDER BY empno desc";
+         
+         System.out.println(sql);
+         pstmt=con.prepareStatement(sql);
+         pstmt.setString(1, ename);
+         pstmt.setString(2, job);
+         rs = pstmt.executeQuery(sql);
+         /*
+         System.out.println(rs.next());
+      // 1행의 데이터가 있는지 여부 확인
+      // 1행의 데이터를 사용할 준비
+         System.out.println("1행 1열: " + rs.getInt(1));
+         System.out.println("1행 2열: " + rs.getString(2));
+      // rs.get데이터 유형(컬럼의 순서)
+         System.out.println(rs.next());
+      // 2행의 데이터가 있는지 여부 확인
+      // 2행의 데이터를 사용할 준비
+         
+      System.out.println("2행 JOB열: " + rs.getString("JOB"));
+      //rs.get데이터유형(컬럼명)
+      System.out.println("2행 SAL열: " + rs.getDouble("SAL"));
+       */
+         int cnt=1;
+         while(rs.next()) {
+        	 
+        	 System.out.print(cnt++ + ":" + rs.getInt(1)+"\t");
+        	 System.out.print(rs.getString("ename")+"\t");
+        	 System.out.print(rs.getString("job")+"\t");
+        	 System.out.print(rs.getInt("mgr")+"\t");
+        	 System.out.print(rs.getDate("hiredate")+"\t");
+        	 System.out.print(rs.getDouble("sal")+"\t");
+        	 System.out.print(rs.getDouble("comm")+"\t");
+        	 System.out.print(rs.getInt("deptno")+"\n");
+        	
+        	 //1. 객체 생성과 할당.
+        	 Emp e = new Emp(rs.getInt("empno"),rs.getString(2),
+        			 rs.getString(3),rs.getInt(4),rs.getDate("hiredate"),
+        			 rs.getDouble(6),rs.getDouble(7),rs.getInt(8));
+        	 //2. ArrayList에 할당.
+        	 list.add(e);
+        	 
+         }
+         System.out.println("객체의 갯수:"+list.size());
+         System.out.println("첫번째 행의 ename : "+list.get(0).getEname());
+         System.out.println("두번째 행의 ename : "+list.get(1).getEname());
+         //ex1) deptList() 기능메서드를 통해 ArrayList<Dept>데이터를 담아서
+         //		데이터 건수와 두번째 부서이름을 출력하세요..
+//         Dept d = new Dept(rs.getInt(0),rs.getString(1),rs.getString(2));
+//         dlist.add(d);
+//     	}
+//     	System.out.println("객체의 갯수 : "+dlist.size());
+//     	System.out.println("두번째 부서 이름 : "+ dlist.get(1).getDeptno());
+         
+      // 4. 자원의 해제
+         rs.close();
+         pstmt.close();
          con.close();
       // 5. 예외 처리
       } catch (SQLException e1) {
@@ -530,9 +636,11 @@ public class A01_Dao {   //DAO : database access object
 		System.out.println("db 처리 에러");
 		try {
 			con.rollback();
+			System.out.println("에러 발생으로 원복 처리");
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			System.out.println("rollback에 문제발생.");
 		}
 	}catch(Exception e) {
 		System.out.println("일반에러");
@@ -586,7 +694,9 @@ public class A01_Dao {   //DAO : database access object
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			if(rs.next()) {
-				 emp = new Emp(rs.getInt(1),rs.getString(2),rs.getString(3), rs.getInt(4),rs.getString(5),rs.getDouble(6),rs.getDouble(7),rs.getInt(8));
+				 emp = new Emp(rs.getInt(1),rs.getString(2),rs.getString(3), 
+								 rs.getInt(4),rs.getString(5),rs.getDouble(6),
+								 rs.getDouble(7),rs.getInt(8));
 			}
 			
 			rs.close();
@@ -601,15 +711,21 @@ public class A01_Dao {   //DAO : database access object
 			
 		return emp;
 	}
+// ex) emp5
+   //public ArrayList<Emp5> elist2(int part){
+
 public static void main(String[] args) {
       // TODO Auto-generated method stub
-//      A01_Dao dao = new A01_Dao();
+      A01_Dao dao = new A01_Dao();
+      ArrayList<Emp> elist = dao.empList2("","");
+      System.out.println("크기 : "+elist.size());
+      System.out.println("첫번째 : " +elist.get(0).getEname());
 //      Emp ins = new Emp(0,"김길동4","대리",7800,"2010/12/12",4000,100,20);
 //      dao.insertEmp(ins);
 		
-		A01_Dao dao = new A01_Dao();
-		Dept ins = new Dept(10,"회계","서울 강남");
-		dao.insertDept(ins);
+//		A01_Dao dao = new A01_Dao();
+//		Dept ins = new Dept(10,"회계","서울 강남");
+//		dao.insertDept(ins);
       
       
       //dao.empList();

@@ -25,6 +25,9 @@ String path = request.getContextPath();
 </script>
 </head>
 <%--
+# 등록처리
+1. 요청값 default값 설정, 모아서 VO객체로 생성.
+2. Dao 기능메서드에 vo로 전달.
 
  --%>
 <body>
@@ -63,12 +66,25 @@ String path = request.getContextPath();
 		<tr><th>사원명</th><td><input type="text" name="ename"/></td></tr>
 		<tr><th>직책</th><td><input type="text" name="job"/></td></tr>
 		<tr><th>관리자번호</th><td><input type="text" name="mgr"/></td></tr>
-		<tr><th>입사일</th><td><input type="text" name="hiredate_s"/></td></tr>
+		<tr><th>입사일</th><td><input type="text" name="hiredate_s" placeholder="YYYY/MM/DD"/></td></tr>
 		<tr><th>급여</th><td><input type="text" name="sal"/></td></tr>
 		<tr><th>보너스</th><td><input type="text" name="comm"/></td></tr>
 		<tr><th>부서번호</th><td><input type="text" name="deptno"/></td></tr>
-		<tr><td colspan="2"><input type="submit" value="등록"/></td></tr>
+		<tr><td colspan="2"><input type="button" value="등록" onclick="validCk()"/></td></tr>
 	</table>
 	</form>
+	<script>
+		function validCk(){
+			var ename=document.querySelector("[name=ename]").value;
+			if(ename.trim()==""){
+				alert("사원명을 입력해 주세요");
+				return;
+			}
+			
+			 
+			//유효성 check후, 최종적으로 전송처리..
+			document.querySelector("form").submit();
+		}
+	</script>
 </body>
 </html>

@@ -1,9 +1,11 @@
 package jspexp.a03_database;
 
 import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.Date;
 
+import jspexp.z01_vo.Dept;
 import jspexp.z01_vo.Pinfo;
 
 
@@ -219,9 +221,8 @@ public class A02_Exp {
 
 		return list;		
 	}
-	
-	
-	
+
+	//====================================MAIN==================================================
 	public static void main(String[] args) {
 		A02_Exp p=new A02_Exp();
 		ArrayList<Pinfo> pp = p.reg(50, "포도", 700000, 150,

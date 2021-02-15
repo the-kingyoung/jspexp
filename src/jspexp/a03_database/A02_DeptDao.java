@@ -137,6 +137,46 @@ public Dept getDept(int deptno) {
 	return dept;
 }
 //=====================================================================================================================	
+public ArrayList<Dept> deptList2(String dname, String loc){
+	   ArrayList<Dept> dlist = new ArrayList<Dept>();
+	   try {
+		   setCon();
+		   String sql="SELECT * FROM DEPT\r\n"
+		   		+ "WHERE dname LIKE '%'||(?)||'%'\r\n"
+		   		+ "AND loc LIKE '%'||(?)||'%'";
+		   
+		   pstmt = con.prepareStatement(sql);
+		   pstmt.setString(1, dname);
+		   pstmt.setString(2, loc);
+		   rs = pstmt.executeQuery(sql);
+		   while(rs.next()) {
+			   dlist.add(new Dept(rs.getInt(1),
+					   			rs.getString(2),
+					   			rs.getString(3)));
+		   }
+		   System.out.println("데이터 크기 : "+dlist.size());
+		   rs.close();
+		   pstmt.close();
+		   con.close();
+		   
+	   }catch(SQLException e) {
+		   e.printStackTrace();
+		   System.out.println("## db처리 예외 ##");
+		   System.out.println(e.getMessage());
+		   try {
+			con.rollback();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+	   }catch(Exception e) {
+		   e.printStackTrace();
+		   System.out.println("## 일반 예외 ##");
+		   System.out.println(e.getMessage());
+	   }
+	
+	   return dlist;
+}	
+//=====================================================================================================================	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A02_DeptDao dao = new A02_DeptDao();

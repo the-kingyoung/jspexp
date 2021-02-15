@@ -26,7 +26,7 @@ String path = request.getContextPath();
 <%
 String empno = request.getParameter("empno");
 A01_Dao dao = new A01_Dao();
-//1개의 단위객체
+//1개의 단위객체 : 전체 리스트 화면에서 키인 empno를 요청값으로 호출해서 상세 내용을 가져올때 사용된다.
 Emp emp = dao.getEmp(new Integer(empno));
 %>
 <body>
