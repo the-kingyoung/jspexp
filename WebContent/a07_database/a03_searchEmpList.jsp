@@ -15,7 +15,7 @@ String path = request.getContextPath();
 <title>Insert title here</title>
 <link rel="stylesheet" href="<%=path %>/a00_com/a00_com.css">
 <style>
-
+	tr:hover{background-color:pink;}
 </style>
 <script>
 	window.onload=function(){
@@ -85,7 +85,7 @@ String path = request.getContextPath();
 	</table>
 	<script>
 		function detail(empno) {
-			alert("요청할번호: " + empno);
+			//alert("요청할번호: " + empno);
 			location.href = "a11_empDetail.jsp?empno=" + empno;
 		}
 	</script>

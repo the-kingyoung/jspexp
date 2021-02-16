@@ -28,12 +28,15 @@ String path = request.getContextPath();
 <%
 	String name = request.getParameter("name");
 	if(name==null) name="";
+	
 	int price=0;
 	String priceS = request.getParameter("price");
-	if(priceS!=null&& !priceS.equals("")) price = new Integer(priceS);
+	if(priceS!=null && !priceS.equals("")) price = new Integer(priceS);
+	
 	int cnt=0;
 	String cntS = request.getParameter("cnt");
-	if(cntS!=null&& !cntS.equals("")) cnt = new Integer(cntS);
+	if(cntS!=null && !cntS.equals("")) cnt = new Integer(cntS);
+	
 	String company = request.getParameter("company");
 	if(company==null) company="";
 	String inmanager = request.getParameter("inmanager");

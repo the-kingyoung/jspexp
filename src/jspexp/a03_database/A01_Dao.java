@@ -611,43 +611,96 @@ public class A01_Dao {   //DAO : database access object
 	to_date('2021/05/01','YYYY/MM/DD'),
 	3500,100,10)
     */
-   public void insertEmp(Emp ins) {
-	   //1. 접속 autocommit(false)
+public void insertEmp(Emp ins) {
+	   
 	   try {
 		   setCon();
-		   //2. 대화
 		   stmt = con.createStatement();
-		   String sql = "    INSERT INTO emp2 values(\r\n"
-		   		+ "	emp21_seq.nextval,'"+ins.getEname()+"','"+ins.getJob()
-		   		+"',"+ins.getMgr()+",\r\n"
-		   		+ "	to_date('"+ins.getHiredate_s()+"','YYYY/MM/DD'),\r\n"
-		   		+ "	"+ins.getSal()+","+ins.getComm()+","+ins.getDeptno()+")";
-		   System.out.println("###");
+		   String sql = "INSERT INTO emp2 values(emp21_seq.nextval,"
+		   		+ "'"+ins.getEname()+"',"
+		   		+ "'"+ins.getJob()+"',"
+   				+ ""+ins.getEmpno()+","
+		   		+ "to_date('"+ins.getHiredate_s()+"', 'YYYY-MM-DD'),"
+   				+ ""+ins.getSal()+","+ins.getComm()+","
+				+ ""+ins.getDeptno()+")";
+		   
+		   System.out.println("####");
 		   System.out.println(sql);
 		   stmt.executeUpdate(sql);
 		   con.commit();
 		   stmt.close();
 		   con.close();
-		   //3. commit
-		   //4. 예외처리
-	} catch (SQLException e) {
-		// TODO: handle exception
-		e.printStackTrace();
-		System.out.println("db 처리 에러");
-		try {
-			con.rollback();
-			System.out.println("에러 발생으로 원복 처리");
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-			System.out.println("rollback에 문제발생.");
+		   
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("db 처리 에리");
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch (Exception e) {
+			System.out.println("일반에러");
 		}
-	}catch(Exception e) {
-		System.out.println("일반에러");
-	}
+   }
+
+   // ex) emp5
+   //public ArrayList<Emp5> elist2(int part){
+
+/*
+    INSERT INTO emp2 values(
+	emp21_seq.nextval,'홍길동','사원',7780,
+	to_date('2021/05/01','YYYY/MM/DD'),
+	3500,100,10)
+    */
+public void updateEmp(Emp upt) {
+	   
+	   try {
+		   setCon();
+		   con.setAutoCommit(false);
+		   
+		   String sql = "UPDATE EMP2\n"
+		   		+ "   SET ename = ?,\n"
+		   		+ "   	   job = ?,\n"
+		   		+ "   	   mgr = ?,\n"
+		   		+ "   	   hiredate = to_date(?, 'YYYY-MM-DD'),\n"
+		   		+ "   	   sal = ?,\n"
+		   		+ "   	   comm = ?,\n"
+		   		+ "   	   deptno = ?\n"
+		   		+ "WHERE empno = ?";
+		   
+		   pstmt = con.prepareStatement(sql);
+		   pstmt.setString(1, upt.getEname());
+		   pstmt.setString(2, upt.getJob());
+		   pstmt.setInt(3, upt.getMgr());
+		   pstmt.setString(4, upt.getHiredate_s());
+		   pstmt.setDouble(5, upt.getSal());
+		   pstmt.setDouble(6, upt.getComm());
+		   pstmt.setInt(7, upt.getDeptno());
+		   pstmt.setInt(8, upt.getEmpno());
+		   
+		   pstmt.executeUpdate();
+		   
+		   con.commit();
+		   
+		   pstmt.close();
+		   con.close();
+		   
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("db 처리 에러");
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} catch (Exception e) {
+			System.out.println("일반에러");
+		}
 }
 
-   /*
+/*
     INSERT INTO dept2 values(
 	10,'ACCOUNT','NEW YORK')
     */
@@ -694,9 +747,11 @@ public class A01_Dao {   //DAO : database access object
 			stmt = con.createStatement();
 			rs = stmt.executeQuery(sql);
 			if(rs.next()) {
-				 emp = new Emp(rs.getInt(1),rs.getString(2),rs.getString(3), 
-								 rs.getInt(4),rs.getString(5),rs.getDouble(6),
-								 rs.getDouble(7),rs.getInt(8));
+	               emp = new Emp(rs.getInt("empno"), 
+	                       rs.getString(2),rs.getString(3),
+	                       rs.getInt(4), rs.getDate("hiredate"),
+	                       rs.getDouble(6), rs.getDouble(7),
+	                       rs.getInt(8) );
 			}
 			
 			rs.close();

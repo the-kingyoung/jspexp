@@ -55,8 +55,6 @@ public class A02_Exp {
 			 (int pnum, String pname, int price, int pstock, Date pnewreg, String pcompany, Date prereg,
 			String pdirector
 			 */
-			
-		
 		rs.close();
 		stmt.close();
 		con.close();
@@ -70,7 +68,7 @@ public class A02_Exp {
 		return list;		
 	}
 
-	//검색어 가져오기
+	//검색어 가져오기============================================================================================================
 	public ArrayList<Pinfo> pList(String pname){
 
 		ArrayList<Pinfo> list = new ArrayList<Pinfo>();
@@ -101,7 +99,7 @@ public class A02_Exp {
 		return list;		
 	}
 
-	//가격 가져오기
+	//가격 가져오기============================================================================================================
 	public ArrayList<Pinfo> pList(String from, String to){
 
 		ArrayList<Pinfo> list = new ArrayList<Pinfo>();
@@ -225,10 +223,9 @@ public class A02_Exp {
 	//====================================MAIN==================================================
 	public static void main(String[] args) {
 		A02_Exp p=new A02_Exp();
-		ArrayList<Pinfo> pp = p.reg(50, "포도", 700000, 150,
-				"2020/03/21", "아시아컴퍼니", "2021/02/20", "이나");
-		for(Pinfo o : pp) {
-			System.out.println(o.getPname());
+		ArrayList<Pinfo> asd = p.pList("100", "100000");
+		for(Pinfo pList	: asd) {
+			System.out.println(pList.getPname());
 		}
 	}
 }

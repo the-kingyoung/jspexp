@@ -25,7 +25,7 @@ public class A03_ShopDao {
          System.out.println("접속 성공 !!! ^^ ㅎㅎ");
       }
       
-		// 조회 메서드
+		// 조회 메서드============================================================================================================================
 		public ArrayList<Product2> shopList(Product2 sch) {
 			ArrayList<Product2> list = new ArrayList<Product2>();
 			try {
@@ -57,7 +57,7 @@ public class A03_ShopDao {
 			return list;
 		}
 
-		// 등록 메서드
+		// 등록 메서드============================================================================================================================
 		public void insertProduct(Product2 ins) {
 			try {
 				setCon();
@@ -86,7 +86,7 @@ public class A03_ShopDao {
 			}
 		}
       
-      // 단일데이터 메서드
+      // 단일데이터 메서드============================================================================================================================
 		public Product2 getProd(int prono) {
 			Product2 pro = null;
 			try {
@@ -116,12 +116,59 @@ public class A03_ShopDao {
 			}
 			return pro;
 		}
-      
+// 수정 메서드============================================================================================================================
+		public void updateProduct(Product2 upt) {
+			try {
+				setCon();
+				con.setAutoCommit(false);
+				String sql = "UPDATE product2\r\n"
+						+ "SET name = ?,\r\n"
+						+ "	price = ?,\r\n"
+						+ "	cnt = ?,\r\n"
+						+ "	credte = to_date(?,'YYYY-MM-DD'),\r\n"
+						+ "	company = ?,\r\n"
+						+ "	INCOMEDTE = to_date(?,'YYYY-MM-DD'),\r\n"
+						+ "	inmanager = ?\r\n"
+						+ "WHERE pno = ?";
+				
+				System.out.println("등록 처리");
+				System.out.println(sql);
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1,upt.getName());
+				pstmt.setInt(2,upt.getPrice());
+				pstmt.setInt(3,upt.getCnt());
+				pstmt.setString(4,upt.getCredteS());
+				pstmt.setString(5,upt.getCompany());
+				pstmt.setString(6,upt.getIncomedateS());
+				pstmt.setString(7,upt.getInmanager());
+				pstmt.setInt(8,upt.getPno());
+
+				pstmt.executeUpdate();
+			
+				
+				con.commit();
+				
+				pstmt.close();
+				con.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("입력 에러 : "+e.getMessage());
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}catch(Exception e) {
+				System.out.println("일반 에러 : " + e.getMessage());
+			}
+		}      
+// 메인============================================================================================================================
    public static void main(String[] args) {
       A03_ShopDao dao = new A03_ShopDao();
-      dao.shopList(new Product2("사과",1000,9999));
-
-      dao.insertProduct(new Product2(0,"딸기",12000,50,null,"딸기마을",null,"딸기맨"));
-      dao.getProd(10000);
+//      	dao.insertProduct(new Product2(10001, "바나나",5000,5,"2021-02-20","바나나농장","2021-02-20","이박사"));
+      dao.updateProduct(new Product2(10007, "수박",5000,5,"2021-02-20","수박농장","2021-02-20","수박사"));
+      
    }
 }

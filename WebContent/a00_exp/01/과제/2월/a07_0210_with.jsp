@@ -79,15 +79,9 @@ String path = request.getContextPath();
 	<h3>물건 리스트</h3>
 	<form method="post">
 	<table>
-		<tr><th>물건명</th><td><input type="text" name="name"/></td></tr>
-		<tr><th>가격</th><td><input name="frPrice" value="<%=frPrice%>"/>
-							~<input name="toPrice" value="<%=toPrice%>"/></td></tr>
-		<tr>
-		<td colspan="2">
-		<input type="submit" value="검색"/>
-		<input type="button" value="등록" onclick="regProduct()"/>
-		</td>
-		</tr>
+		<tr><th>물건명</th><td><input name="name"/></td></tr>
+		<tr><th>가격</th><td><input name="frPrice" value="<%=frPrice%>"/>~<input name="toPrice" value="<%=toPrice%>"/></td></tr>
+		<tr><td colspan="2"><input type="submit" value="검색"/><input type="button" value="등록" onclick="regProduct()"/></td></tr>
 	</table>
 	</form>
 	<table>
