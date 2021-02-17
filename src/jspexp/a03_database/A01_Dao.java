@@ -263,7 +263,7 @@ public class A01_Dao {   //DAO : database access object
  	2) db 서버의 sql 해석 속도를 향상시켜 빠른 처리를 한다.
  	
  */
-// 조회 처리 메서드.. (매개변수 없는 처리)
+// 조회 처리 메서드.. (매개변수 있는 처리)
    public ArrayList<Emp> empList2(String ename, String job){
       ArrayList<Emp> list = new ArrayList<Emp>();
       // 1. 공통메서드 호출
@@ -339,15 +339,6 @@ public class A01_Dao {   //DAO : database access object
       }catch(Exception e) {
     	  System.out.println(e.getMessage());
       }
-
-      String info = "jdbc:oracle:thin:@localhost:1521:xe";
-      try {
-         con = DriverManager.getConnection(info, "scott", "tiger");
-      } catch (SQLException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-      }
-      System.out.println("접속 성공");
       
       return list;
    }
@@ -681,9 +672,50 @@ public void updateEmp(Emp upt) {
 		   pstmt.setInt(8, upt.getEmpno());
 		   
 		   pstmt.executeUpdate();
-		   
+		   		   
 		   con.commit();
+		   pstmt.close();
+		   con.close();
 		   
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("db 처리 에러");
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} catch (Exception e) {
+			System.out.println("일반에러");
+		}
+}
+
+// ex) emp5
+   //public ArrayList<Emp5> elist2(int part){
+
+// ex) emp5
+   //public ArrayList<Emp5> elist2(int part){
+
+/*
+    INSERT INTO emp2 values(
+	emp21_seq.nextval,'홍길동','사원',7780,
+	to_date('2021/05/01','YYYY/MM/DD'),
+	3500,100,10)
+    */
+public void deleteEmp(int empno) {
+	   
+	   try {
+		   setCon();
+		   con.setAutoCommit(false);
+		   
+		   String sql = "DELETE FROM emp2 WHERE empno=?";
+		   
+		   pstmt = con.prepareStatement(sql);
+		   pstmt.setInt(1, empno);
+		   
+		   pstmt.executeUpdate();
+		   		   
+		   con.commit();
 		   pstmt.close();
 		   con.close();
 		   
@@ -739,6 +771,15 @@ public void updateEmp(Emp upt) {
    
 // ex) emp5
    //public ArrayList<Emp5> elist2(int part){
+
+/*
+    INSERT INTO dept2 values(
+	10,'ACCOUNT','NEW YORK')
+    */
+
+
+// ex) emp5
+   //public ArrayList<Emp5> elist2(int part){
    public Emp getEmp(int empno){
 		Emp emp = null;
 		try {
@@ -766,6 +807,9 @@ public void updateEmp(Emp upt) {
 			
 		return emp;
 	}
+// ex) emp5
+   //public ArrayList<Emp5> elist2(int part){
+
 // ex) emp5
    //public ArrayList<Emp5> elist2(int part){
 

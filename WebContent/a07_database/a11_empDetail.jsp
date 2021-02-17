@@ -25,6 +25,13 @@
          //form객체의 하위 값들 key=value형식으로 전송
          document.querySelector("form").submit();
       }
+      var delBtn = document.querySelector("#delBtn");
+      delBtn.onclick=function(){
+    	  if(confirm("삭제하시겠습니까?")){
+    	         document.querySelector("[name=proc]").value="del";
+    	         document.querySelector("form").submit();
+    	  }
+      }
    };
 </script>
 </head>
@@ -41,6 +48,18 @@
    2) dao에 선언할 메서드로 처리.
 4. js
    수정 처리 완료, 수정된 내용 조회/메인화면 이동 처리.
+# 삭제 처리
+1. 수정화면 처리
+   1) 삭제 버튼 클릭시, 요청값을 proc 속성에 속성값 del로 처리하고 요청값 전송.
+   2) proc=del와 함께 수정할 데이터 입력 받아 출력 처리한다.
+2. DAO 처리
+   1) 수정할 sql확인
+   2) 기능 메서드 public void delEmp(int empno) 구현..
+3. jsp 화면 처리
+   1) 넘겨온 요청값을 기능 메서드의 매개변수로 넘기기 위해 객체 처리
+   2) dao에 선언할 메서드로 처리.
+4. js
+   삭제 처리 완료, 메인화면 이동 처리.
    
  --%>
 <%
@@ -53,6 +72,7 @@ String sal = request.getParameter("sal");
 String comm = request.getParameter("comm");
 String deptno = request.getParameter("deptno");
 String empno = request.getParameter("empno");
+if(empno==null||empno.equals("")) empno="0";
 log("#"+proc);
 log("#"+ename);
 log("#"+job);
@@ -62,6 +82,7 @@ log("#"+sal);
 log("#"+comm);
 log("#"+deptno);
 log("#empno"+empno);
+
 A01_Dao dao = new A01_Dao();
 if(proc!=null){
 	if(proc.equals("upt")){
@@ -70,6 +91,10 @@ if(proc!=null){
 						  Double.parseDouble(sal), Double.parseDouble(comm),
 						  Integer.parseInt(deptno) );
 	dao.updateEmp(upt);
+	}
+	if(proc.equals("del")){
+		System.out.println("삭제준비완료:"+empno);
+		dao.deleteEmp(Integer.parseInt(empno));
 	}
 }
 //1개의 단위객체 : 전체 리스트 화면에서 키인 empno를 요청값으로 호출해서 상세 내용을 가져올때 사용된다.
@@ -82,12 +107,17 @@ Emp emp = dao.getEmp(new Integer(empno));
          location.href="a03_searchEmpList.jsp";
       }
    }
+   if(proc=="del"){
+	   alert("삭제 성공");
+	   location.href="a03_searchEmpList.jsp";
+   }
 </script>
 <body>
    <h3>사원상세정보[<%=empno %>]</h3>
    <form method="post">
       <input type="hidden" name="proc" value=""/>
    <table>
+   	  <%if(emp!=null){ %>
       <tr><th>사원번호</th><td><input type="text" name="empno" value="<%=emp.getEmpno()%>"></td></tr>
       <tr><th>사원명</th><td><input type="text" name="ename" value="<%=emp.getEname()%>"></td></tr>
       <tr><th>직책</th><td><input type="text" name="job" value="<%=emp.getJob()%>"></td></tr>
@@ -96,6 +126,9 @@ Emp emp = dao.getEmp(new Integer(empno));
       <tr><th>급여</th><td><input type="text" name="sal" value="<%=emp.getSal()%>"></td></tr>
       <tr><th>보너스</th><td><input type="text" name="comm" value="<%=emp.getComm()%>"></td></tr>
       <tr><th>부서번호</th><td><input type="text" name="deptno" value="<%=emp.getDeptno()%>"></td></tr>
+      <%}else{ %>
+      <tr><td colspan="2">데이터가 없습니다!</td></tr>
+      <%} %>
       <tr><td colspan="2">
       <input type="button" value="수정" id="uptBtn"/>
       <input type="button" value="삭제" id="delBtn"/>

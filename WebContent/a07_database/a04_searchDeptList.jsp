@@ -103,7 +103,7 @@
    </table>   
    <script>
    	function detail(deptno){
-   		alert("요청 부서 번호 : " +deptno);
+   		//alert("요청 부서 번호 : " +deptno);
    		location.href = "a12_deptDetail.jsp?deptno="+deptno;
    	}
    </script>

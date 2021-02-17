@@ -177,6 +177,77 @@ public ArrayList<Dept> deptList2(String dname, String loc){
 	   return dlist;
 }	
 //=====================================================================================================================	
+public void updateDept(Dept upt) {
+	   //1. 접속 autocommit(false)
+	   try {
+		   setCon();
+		   con.setAutoCommit(false);
+		   //2. 대화
+
+		   String sql = "UPDATE DEPT10 \r\n"
+		   		+ "SET dname=?,\r\n"
+		   		+ "	loc=?\r\n"
+		   		+ "	WHERE deptno =?";
+		   pstmt = con.prepareStatement(sql);
+		   pstmt.setString(1, upt.getDname());
+		   pstmt.setString(2, upt.getLoc());
+		   pstmt.setInt(3, upt.getDeptno());
+		   pstmt.executeUpdate();
+		   //3. commit
+		   con.commit();
+		   //자원해제
+		   pstmt.close();
+		   con.close();
+		   //4. 예외처리
+	} catch (SQLException e) {
+		// TODO: handle exception
+		e.printStackTrace();
+		System.out.println("db 처리 에러");
+		try {
+			con.rollback();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}catch(Exception e) {
+		System.out.println("일반에러");
+	}
+}
+//=====================================================================================================================	
+public void deleteDept(int deptno) {
+	   //1. 접속 autocommit(false)
+	   try {
+		   setCon();
+		   con.setAutoCommit(false);
+		   //2. 대화
+
+		   String sql = "DELETE FROM dept10 WHERE deptno=?";
+		   pstmt = con.prepareStatement(sql);
+		   pstmt.setInt(1, deptno);
+
+		   pstmt.executeUpdate();
+		   //3. commit
+		   con.commit();
+		   //자원해제
+		   pstmt.close();
+		   con.close();
+		   //4. 예외처리
+	} catch (SQLException e) {
+		// TODO: handle exception
+		e.printStackTrace();
+		System.out.println("db 처리 에러");
+		try {
+			con.rollback();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}catch(Exception e) {
+		System.out.println("일반에러");
+	}
+}
+
+	//=====================================================================================================================	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A02_DeptDao dao = new A02_DeptDao();

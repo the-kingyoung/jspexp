@@ -92,8 +92,8 @@ log("#inmanager : "+inmanager);
 		<tr><th>물건재고량</th><td><input type="text" name="cnt" value="<%=pro.getCnt()%>"></td></tr>
 		<tr><th>제조사</th><td><input type="text" name="company" value="<%=pro.getCompany()%>"></td></tr>
 		<tr><th>입고책임자</th><td><input type="text" name="inmanager" value="<%=pro.getInmanager()%>"></td></tr>
-		<tr><th>신규등록일</th><td><input type="text" name="credteS" value="<%=pro.getCredte()%>"></td></tr>
-		<tr><th>최근입고일</th><td><input type="text" name="incomedteS" value="<%=pro.getIncomedate()%>"></td></tr>
+		<tr><th>신규등록일</th><td><input type="date" name="credteS" value="<%=pro.getCredte()%>"></td></tr>
+		<tr><th>최근입고일</th><td><input type="date" name="incomedteS" value="<%=pro.getIncomedate()%>"></td></tr>
 		
 		<%}else{ %>
 		<tr><td colspan="2">데이터가 없습니다.</td></tr>
