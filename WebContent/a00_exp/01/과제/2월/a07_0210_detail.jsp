@@ -23,7 +23,15 @@ String path = request.getContextPath();
 		uptBtn.onclick=function(){
 			document.querySelector("[name=proc]").value="update";
 			document.querySelector("#upForm").submit();
+		};
+		var delBtn = document.querySelector("#delBtn");
+		delBtn.onclick=function(){
+			if(confirm("삭제하시겠습니까?")){
+				document.querySelector("[name=proc]").value="del";
+				document.querySelector("#upForm").submit();
+			}
 		}
+		
 	};
 </script>
 </head>
@@ -68,6 +76,10 @@ log("#inmanager : "+inmanager);
 					company,incomedate,inmanager);
 			dao.updateProduct(upt);
 		}
+		if(proc.equals("del")){
+			System.out.println("# 삭제처리!! : "+pno);
+			dao.deleteProduct(pno);
+		}
 	}
 	Product2 pro = dao.getProd(pno);
 
@@ -79,6 +91,12 @@ log("#inmanager : "+inmanager);
 			location.href="a07_0210_with.jsp";
 		}
 	}
+	if(proc=="del"){
+		alert("삭제되었습니다.\n메인페이지로 이동하겠습니다.")
+		location.href="a07_0210_with.jsp";
+		
+	}
+
 </script>
 <body>
 	<h3>상세화면</h3>

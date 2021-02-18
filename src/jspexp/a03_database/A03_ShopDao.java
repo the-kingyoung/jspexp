@@ -164,6 +164,40 @@ public class A03_ShopDao {
 				System.out.println("일반 에러 : " + e.getMessage());
 			}
 		}      
+// 수정 메서드============================================================================================================================
+		public void deleteProduct(int pno) {
+			try {
+				setCon();
+				con.setAutoCommit(false);
+				String sql = "DELETE FROM product2 WHERE pno=?";
+				
+				System.out.println("### 물품 삭제 처리 ###");
+				System.out.println(sql);
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, pno);
+		
+				pstmt.executeUpdate();
+			
+				
+				con.commit();
+				
+				pstmt.close();
+				con.close();
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("입력 에러 : "+e.getMessage());
+				try {
+					con.rollback();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}catch(Exception e) {
+				System.out.println("일반 에러 : " + e.getMessage());
+			}
+		}
+
 // 메인============================================================================================================================
    public static void main(String[] args) {
       A03_ShopDao dao = new A03_ShopDao();

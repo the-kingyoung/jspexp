@@ -28,6 +28,8 @@
       var delBtn = document.querySelector("#delBtn");
       delBtn.onclick=function(){
     	  if(confirm("삭제하시겠습니까?")){
+    		  //var empno = document.querySelector("[name=empno]").value;
+    			  //location.href="a11_empDetail.jsp?proc=del&empno="+empno;
     	         document.querySelector("[name=proc]").value="del";
     	         document.querySelector("form").submit();
     	  }
@@ -108,7 +110,7 @@ Emp emp = dao.getEmp(new Integer(empno));
       }
    }
    if(proc=="del"){
-	   alert("삭제 성공");
+	   alert("삭제 성공");//삭제 확인 후, 메인화면으로 이동
 	   location.href="a03_searchEmpList.jsp";
    }
 </script>
