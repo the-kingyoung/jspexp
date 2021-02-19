@@ -45,7 +45,7 @@ $("[속성$=속성값]") : 해당 속성에 속성값으로 끝나는 모든 요
 </script>
 </head>
 <body>
-	<h3>제목</h3>
+	<h3 id="prev"></h3>
 	<a href="http://naver.com">one</a><br/>
 	<a href="https://naver.com" target="_blank">two</a><br/>
 	<a href="https://daume.net">three</a><br/>

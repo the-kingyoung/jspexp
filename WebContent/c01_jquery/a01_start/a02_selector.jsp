@@ -20,22 +20,22 @@
  
 */
 //
-   $(document).ready(function(){
-	      $("h3").text("계층 선택자");
-	      //$("부모 > 자식") : 부모 자식 관계에서 지식에 대한 석택..
-	      $("ul.topnav > li").css("border","3px double red");
-	      console.log($("ul.topnav > li" ).length);
-	      //$("상위 하위") : 계층 레벨에 상관없이 상위 요소객체를 가진 하위 요소객체 선택..
-	      $("form input").css("border","2px dotted blue");
-	      $("form fieldset input").css("background-color","yellow");
-	      //label을 앞으로 둔 input객체에 대한 속성과 값의 설정.
-	      //.val() : form하위 객체의 value값을 지정하거나 호출할 때 사용된다.
-	      $("label + input").css("color","blue").val("Labeled!");
-	   });
+	$(document).ready(function() {
+		$("h3").text("계층 선택자");
+		//$("부모 > 자식") : 부모 자식 관계에서 지식에 대한 석택..
+		$("ul.topnav > li").css("border", "3px double red");
+		console.log($("ul.topnav > li").length);
+		//$("상위 하위") : 계층 레벨에 상관없이 상위 요소객체를 가진 하위 요소객체 선택..
+		$("form input").css("border", "2px dotted blue");
+		$("form fieldset input").css("background-color", "yellow");
+		//label을 앞으로 둔 input객체에 대한 속성과 값의 설정.
+		//.val() : form하위 객체의 value값을 지정하거나 호출할 때 사용된다.
+		$("label + input").css("color", "blue").val("Labeled!");
+	});
 </script>
 </head>
 <body>
-   <h3>계층관계 선택자</h3>
+   <h3></h3>
 	<form>
 		<div>기본 폼</div>
 		<label for="name">기본 폼의 자식</label> <input name="name" id="name">

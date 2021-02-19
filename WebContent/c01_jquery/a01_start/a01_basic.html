@@ -10,16 +10,26 @@
 # js 라이브러리 사용하기.
 1. CDN(Content Delivery Network)
 	src="https://code.jquery.com/jquery-3.5.1.js"
+	
 2. lib(jquery-3.5.1.js)를 다운로드해서 서버에 특정 위치에서 호출해서 사용
  
 */
 /*
 1. 기본코드 
 	$(document).ready(함수/익명함수수행)
-	window.onload=function(){};와 동일한 처리
+	window.onload=function(){};와 동일한 처리	//이미지, 각종 태그들이 온로드가 된 이후에 js를 실행한다
+	ex) $(document).ready(function(){});
+	
+		function start(){}
+		$(document).ready(start);
+		
+		
 2. $ : jquery 식별자로 사용.
 	windiw.jQuery=window.$=jQuery
+	
 3. 기본적인 선택자
+	$("선택자").기능메서드();
+	선택자는 css의 선택자(선택자{속성:속성값})
 	기본 형태 
 	$("h1").css("color","red");
 	선택자, 메서드
@@ -28,19 +38,31 @@
 	아이디 선택자 :  $("#target")
 	클래스 선택자 :  $(".item")
 	 $(".item.select")
+	 	ex) <h1 class="item select">
+	 ex)조합 선택자
+	 $(".cls01#target01")
+	 	<h1 class="cls01">
+	 	<h1 class="cls01" id="target01">
+	 	<h1 class="cls01">
+	 $("h2#id01")
+	 <h2>
+	 <h2 id="id01">
+	 <h2>
+	 
 4. 자손/후손 선택자
-$("부모>자속") : 객체 상하위 관계에 있을 떄 바로 위와 바로 밑에 있는 계층 관계에 있을때 하위 객체를 지정한다.
-$("부모 자손") : 객체 상 하위 관계 있을 때, 하위 객체의 깊이에 상관없이, 자손 객체가 있기만 하면 해당 자손 객체를 지정한다.
-$("요소1 + 요소2") : 요소1을 앞세운 요소2 객체 선택한다.
+$("부모 > 자손") : 객체 상하위 관계에 있을 떄 바로 위와 바로 밑에 있는 계층 관계에 있을때 하위 객체를 지정한다.
+$("상위 하위") : 객체 상 하위 관계 있을 때, 하위 객체의 깊이에 상관없이, 자손 객체가 있기만 하면 해당 자손 객체를 지정한다.
+$("요소1 + 요소2") : 전제 조건이 계층 레벨에서 같은 레벨. 요소1을 바로 앞세운 요소2 객체 선택한다.
 	ex)  $("label+input").css("color","blue").val("Labeled!");
 $("요소1~요소2") : 요소1 이후에 같은 계층의 모든 요소2 선택한다.
+	요소1과 요소2 사이에 다른 요소들이 있어도 적용이 되고, 요소2가 여러개 있더라도 다 적용이 된다.
 	ex)  $("#prev ~ div").css("border","3px groove blue");
 
  */
 //
 	$(document).ready(function(){
 		   $("h2").text("jquery 시작");
-		   $("*").css("color","red");
+		   $("*").css("color","black");
 		   console.log("첫 번째 div값 : " + $("div")[0].innerHTML);
 		   console.log("두 번째 div값 : " + $("div")[1].innerHTML);
 		   $("#target").css("color","red");
@@ -48,6 +70,7 @@ $("요소1~요소2") : 요소1 이후에 같은 계층의 모든 요소2 선택�
 		   //.text() : 읽기와 저장 가능 기능 메서드 text 문자 그대로 출력 및 저장
 		   console.log("#target 값 : " + $("#target").text());
 		   $(".myClass").css("color","blue");
+		   // # 같은 여러 요소객체가 있을 때, 위치기반으로 선택하여 원하는 속성으로 속성값을 처리하거나 출력할 때 활용된다.
 		   //.first() : 대상객체에 첫번째,
 		   //.last() : 대상객체의 화면에서 마지막 객체
 		   //.eq(index) : 대상객체의 index번째 객체
@@ -56,11 +79,9 @@ $("요소1~요소2") : 요소1 이후에 같은 계층의 모든 요소2 선택�
 		   //ex) h3 7개를 출력하고, 짝수번째 class를 cls01, 홀수번째 class를 cls02로 
 		   //지정하여 해당 label를 짝수/홀수로 표기하고, 글자색상을 orange와 pink로 jquery로 지정하세요
 		   $(".cls02").text("홀수").css("color","pink");
+ 			//$("선택자").기능메서드1().기능메서드2() : 특정 선택자에서 여러 기능처리를 하는 chainning을 처리할 수 있다.
 		   $(".cls01").text("짝수");
 		   $(".cls01").css("color","orange");
-
-		   
-
 	});
 </script>
 </head>

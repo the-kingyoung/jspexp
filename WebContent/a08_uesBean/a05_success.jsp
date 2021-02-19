@@ -21,7 +21,7 @@
 */
 //
    $(document).ready(function(){
-      $("h3").text("시작");
+     // $("h3").text("시작");
    });
    function logout(){
 	   location.href="a05_success.jsp?logout=y";
@@ -31,6 +31,7 @@
 <%
 	String logout = request.getParameter("logout");
 	if(logout!=null&&logout.equals("y")){
+		//session bean으로 m으로 된 것만 null session bean을 삭제 처리..
 		session.setAttribute("m",null);
 		response.sendRedirect("a04_login.jsp");
 	}

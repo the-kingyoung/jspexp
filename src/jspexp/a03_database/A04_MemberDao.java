@@ -116,6 +116,8 @@ public class A04_MemberDao {
 			return emp;
 		}
 //==========================로그인 메서드=======================
+	   //데이터가 있을 때, 데이터가 할당된 Member 객체를 return
+	   //데이터가 없을 때, null을 return
 	   public Member login(Member login) {
 		   Member m = null;
 		try {
@@ -179,6 +181,29 @@ public class A04_MemberDao {
 				System.out.println("일반에러" + e.getMessage());
 			}
 			return m;
+		}
+
+		//==========================로그인 메서드=======================
+		//데이터가 있는지 여부를 boolean을 확인
+		public boolean hasMember(String id) {
+			boolean hasMem=false;
+			try {
+				setCon();
+				String sql = "SELECT * FROM member5\r\n" + "WHERE id=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, id);
+				rs = pstmt.executeQuery();
+				hasMem = rs.next();
+				
+				rs.close();
+				pstmt.close();
+				con.close();
+			} catch (SQLException e) {
+				System.out.println("DB에러" + e.getMessage());
+			} catch (Exception e) {
+				System.out.println("일반에러" + e.getMessage());
+			}
+			return hasMem;
 		}
 
 		public static void main(String[] args) {

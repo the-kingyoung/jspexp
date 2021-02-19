@@ -1,25 +1,27 @@
 package jspexp.z01_vo;
-/*
 
-[jsp]
-[하] 1. 자바로 Book객체를 만들고, 도서명 가격 저자를 화면에 출력하세요. 
-*/
 public class Book {
 	
-	private String bname;
+	private String title;
 	private int price;
-	private String author;
-	public Book(String bname, int price, String author) {
+	private String writer;
+	private String publisher;
+	public Book() {
 		super();
-		this.bname = bname;
+		// TODO Auto-generated constructor stub
+	}
+	public Book(String title, int price, String writer, String publisher) {
+		super();
+		this.title = title;
 		this.price = price;
-		this.author = author;
+		this.writer = writer;
+		this.publisher = publisher;
 	}
-	public String getBname() {
-		return bname;
+	public String getTitle() {
+		return title;
 	}
-	public void setBname(String bname) {
-		this.bname = bname;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public int getPrice() {
 		return price;
@@ -27,12 +29,18 @@ public class Book {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getAuthor() {
-		return author;
+	public String getWriter() {
+		return writer;
 	}
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public String getPublisher() {
+		return publisher;
+	}
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
 	}
 	
-
+	
 }
