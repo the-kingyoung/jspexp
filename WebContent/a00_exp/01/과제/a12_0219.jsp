@@ -14,18 +14,29 @@
 <link rel="stylesheet" 
    href="<%=path%>/a00_com/a00_com.css">
 <style>
-
+img{
+	width:300px;
+	height:300px;
+}
+.toggleWidth{
+	width:0px;
+	height:0px;
+}
 </style>
 <script type="text/javascript" src="<%=path%>/a00_com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 <%--  
 [하] 1. 재귀적 함수 호출 개념과 toggleClass에 대하여 간단하게 기술하세요.
+		- 특정 내용을 클릭시, 반복적인 내용을 수행할 때 활용된다.
+
 [하] 2. 재귀적 함수와 slideToggle를 이용하여 특정한 이미지가 보였다가 사라졌다가를 처리해보세요.
 
 --%>
 //
    $(document).ready(function(){
-      $("h3").text("시작");
+      $("#run").click(function(){
+    	  $("img").first().toggleClass("toggleWidth");
+      });
    });
 </script>
 </head>
@@ -56,8 +67,8 @@
 		</table>
 	</form>
 	<h2>${param.num1}X${param.num2}=${param.num1*param.num2}입니다.</h2>
-	<h2>${empty param.answer?"":(param.num1*param.num2 == param.answer)?"
-			따라서 정답입니다!":"따라서 오답입니다!"}</h2>
+	<h2>${empty param.answer?"":(param.num1*param.num2 == param.answer)?
+										"따라서 정답입니다!":"따라서 오답입니다!"}</h2>
 			
 <%--3. useBean과 el을 이용하여 회원가입 정보입력과 가입된 정보를 출력 처리하세요.~--%>
 <jsp:useBean id="info" class="jspexp.z01_vo.Person" scope="session"/>
@@ -74,5 +85,8 @@
 	<h4>이름 : ${info.name }</h4>
 	<h4>나이 : ${info.age }</h4>
 	<h4>사는곳 : ${info.loc }</h4>
+	
+	<img src="img1.JPG" id="erImg">
+	<input type="button" value="act" id="run"/>
 </body>
 </html>
