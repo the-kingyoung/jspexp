@@ -10,6 +10,14 @@ public class Book {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Book(String title, int price, String writer) {
+		super();
+		this.title = title;
+		this.price = price;
+		this.writer = writer;
+	}
+
 	public Book(String title, int price, String writer, String publisher) {
 		super();
 		this.title = title;

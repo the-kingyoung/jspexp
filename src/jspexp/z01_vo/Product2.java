@@ -20,6 +20,7 @@ public class Product2 {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	public Product2(int pno, String name, int price, int cnt, Date credte, String company, Date incomedate,
 			String inmanager) {
 		super();

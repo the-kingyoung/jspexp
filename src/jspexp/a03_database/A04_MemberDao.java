@@ -198,10 +198,10 @@ public class A04_MemberDao {
 				rs.close();
 				pstmt.close();
 				con.close();
-			} catch (SQLException e) {
+			} catch (SQLException e) {} catch (Exception e) {
+		
 				System.out.println("DB에러" + e.getMessage());
-			} catch (Exception e) {
-				System.out.println("일반에러" + e.getMessage());
+					System.out.println("일반에러" + e.getMessage());
 			}
 			return hasMem;
 		}

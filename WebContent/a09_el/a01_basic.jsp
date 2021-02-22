@@ -21,6 +21,7 @@
 <%--
 # 표현 언어(Expression Language)
 1. jsp에서 사용 가능한 새로운 스크립트 언어
+	데이터가 없을 때, nullpoint예외가 발생하지 않아서, 웹화면에서는 효과적인 언어라고 할수 있다.
 2. 주요 기능
 	1) jsp의 네가지 기본 객체가 제공하는 영역의 속성 사용
 		(page, request, session, application)에서 변수를 사용

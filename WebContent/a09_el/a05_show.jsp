@@ -20,20 +20,26 @@
 <script type="text/javascript">
 /* 
 
-
+	<h2>${bk.title}</h2>
+	<h2>${bk.writer}</h2>
+	<h2>${bk.publisher}</h2>
 */
 //
    $(document).ready(function(){
-     // $("h3").text("시작");
+      $("h3").text("등록 내용");
 
    });
 </script>
 </head>
 <body>
 	<h3></h3>
+	<%--use Bean을 통해서 session범위로 저장되어 있는 내용은
+	el을 이용해서 바로 호출하여 사용할 수 있다. ${bean아이디.속성} --%>
+	<table>
+		<tr><th>도서명</th><td>${bk.title}</td></tr>
+		<tr><th>저자</th><td>${bk.writer}</td></tr>
+		<tr><th>출판사</th><td>${bk.publisher}</td></tr>
+	</table>
 
-	<h2>${bk.title}</h2>
-	<h2>${bk.writer}</h2>
-	<h2>${bk.publisher}</h2>
 </body>
 </html>

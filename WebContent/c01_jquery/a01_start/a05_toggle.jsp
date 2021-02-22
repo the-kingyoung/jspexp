@@ -49,7 +49,7 @@ div{
 		$("#run").click(function() {
 			$(":animated").toggleClass("toggleWidth");
 			//:animated - 동적으로 움직이는 요소객체만, 클릭시마다 class가 
-			//			적용되었다가 적용되지 않았다가를 반복 처리.
+			//			  적용되었다가 적용되지 않았다가를 반복 처리.
 		});
 		function animateIt() {
 			$("#ani").slideToggle("slow", animateIt);

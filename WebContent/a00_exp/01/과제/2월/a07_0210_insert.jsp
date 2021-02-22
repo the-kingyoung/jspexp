@@ -43,7 +43,7 @@ String path = request.getContextPath();
 	if(inmanager==null) inmanager="";
 	if(!name.equals("")){	//초기화면과 구분..
 		A03_ShopDao dao = new A03_ShopDao();
-		dao.insertProduct(new Product2(0, name, price, cnt, null, company, null, inmanager));
+		dao.insertProduct(new Product2());
 	}
 %>
 	<script type="text/javascript">

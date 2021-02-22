@@ -7,6 +7,67 @@ c<!DOCTYPE html>
 	src="/jspexp/a00_com/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 /* 
+
+# jquery 학습.
+1. javascript 기반의 lib이다.
+	기존 javascript + jquery기능 선택자와 함수.
+2. jquery의 주요 학습 범위
+	1) $("선택자")
+		- css 선택자 처리 형식과 동일
+		- 단일형/배열형으로 한번에 여러가지 내용을 선택하여 처리할 수 있다.
+		- 가상 선택자 ::형식 (이벤트나 기타 기능 포함 선택자)
+	2) $().action()
+		- 기능처리 액션 : 위에 선택자 기준으로 하나에 대한 처리뿐만 아니라
+					   for문 없이 동일한 여러개의 선택자를 한번에 적용처리 해준다.
+					   ex) $("h1").text("안녕하세요") : h1은 모두 안녕하세요 출력처리
+		- 출력
+			.text() : tag가 랜더링되지 않은 단순 문자열 출력 형태의
+					  요소객체를 처리할 때 사용된다. (호출/저장)
+					  text("출력내용 표현"), text():출력내용 호출
+					  ex) js textContent, innerText
+			.html() : tag가 랜더링되어 화면에 출력 내지 출력된 tag내용 확인시 사용된다.
+					  html("태그 출력 표현"), html() : html태그 내용 호출 
+					  ex) js의 innerHTML
+		- value값
+			.val() : form 하위 객체의 요소객체에 대하여, 저장값을 할당하거나
+					 호출할때 사용된다.
+		- 속성
+			.attr() : 일반 지원되는 기본 속성값에 대한 설정을 할때 사용된다.
+					  또는 호출할 때 사용된다.
+					  ex) $("h1").attr("align","center"); 속성값 저장
+					  	  $("h1").attr("align") 속성값 호출
+			.css() : css에서 지원하는 속성값을 처리할 수 있다.
+					 ex) $("h1").css("background-color", "red");
+			- 다중의 속성값 처리
+				json형식으로 여러가지 속성을 한번에 설정할 수 있다.
+				$("선택자").attr/css({속성1:속성값2, 속성2:속성값2...})
+				ex) $("h1").css({color:"yellow",backgroundColor:"red",
+								border:"1px solid green"})
+		- 배열에 대한 선택 처리
+			.eq(index) : 다중의 선택에 대하여 index를 이용해서 선택하여 속성을 지정할 수 있다.
+						 ex) $("tr").eq(2).css("text-align","center")
+						 	 :3번째 tr에 대하여 정렬을 중앙으로 처리.
+			.start() : 해당 다중의 선택자중 첫번째 선택
+			.end() : 해당 다중의 선택자 중 마지막 선택7
+		- 함수형 처리
+			.each(function(){}) : 다중 선택자에 대한 배열 처리
+			.map(function(){})  : 다중 선택자에 대한 대상 개별 내용 적용
+			.filter(function(){}) : 다중 선택자에 대한 filter 처리..
+		- 이벤트 처리
+			다양한 이벤트 기능 처리.
+			.hover(함수1, 함수2)
+			.click(function(){})
+			.on("이벤트명",function(){})
+			.toggleXXX(기능 처리.)
+		- 다양한 기능 처리.
+			-append() : 추가 기능 처리
+			- wrap() : 요소객체에 대한 감싸는 태그 처리.
+			- 기능함수1().기능함수2().. : 기능 action 함수 chain 기능
+	3) $.ajax()
+		jquery에서 js의 ajax처리 확장 형태
+		비동기 처리하는 ajax를 jquery의 속성/속성값 형식으로 간편하게 처리해준다.
+	
+
 # js 라이브러리 사용하기.
 1. CDN(Content Delivery Network)
 	src="https://code.jquery.com/jquery-3.5.1.js"

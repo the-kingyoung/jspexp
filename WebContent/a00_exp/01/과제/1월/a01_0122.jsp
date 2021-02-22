@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="jspexp.z01_vo.Book" %>
+    <%@ page import="jspexp.z01_vo.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,9 +15,9 @@
 <%
 	Book b = new Book("삼국지",15000,"황석영");
 %>
-	<h3>도서명 : <%=b.getBname() %></h3>
+	<h3>도서명 : <%=b.getTitle() %></h3>
 	<h3>가격 : <%=b.getPrice() %></h3>
-	<h3>저자 : <%=b.getAuthor() %></h3>
+	<h3>저자 : <%=b.getWriter() %></h3>
 <%--
 [하] 2. 브라우저에서 주소를 입력하여 jsp를 호출하여 화면에 출력되는 과정을 서버/클라이언트 기준으로 기술하세요.
 		1) 브라우저 주소에 ip와 페이지를 입력
