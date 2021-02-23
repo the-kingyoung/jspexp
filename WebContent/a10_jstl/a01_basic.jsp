@@ -43,15 +43,27 @@
 				request.setAttribute("p",new Person("홍길동",25,"서울신림동");
 			%>
 			<c:set var="p01" value="${p}" />
+			
+			#property : 객체의 속성의 접근하는 메서드를 사용하는 것을 말한다.
+				그런데, set/get을 제외하고 모두 소문자로 변경하여 활용한다.
+				public void setName(String name){} 메서드가 있고,
+				이 객체의 property name을 호출한다는 것은 위 기능 메서드를
+				호출해서 처리한다는 것이다. setName ==> name
+				최종 name이 property를 의미한다.
+				el나 jstl에서 호출할때 필드명과 동일하기에 필드로 오인하는 경우가 많은데
+				필드는 private 접근제어자가 붙어 있어 접근하지 못한다.
+				
+				
 	2) 객체의 값의 변경.
-		<c:set target="객체명" property="프로퍼터이름/set메서드명" value="할당할값"/>		
+		<c:set target="객체명(bean의 id, session scope의 변수명, c:set의 var=변수명")
+			 property="프로퍼터이름/set메서드명" value="할당할값"/>		
 		${객체명.프로퍼티명}
 		ex) <c:set target="p01" property="name" value="마길동" />
 		
 		${p01.name} : 변경된 데이터 확인..
 	3) 조건문 처리
 		- 단일조건문
-		<c:if test="boolean">
+		<c:if test="${el의 변수를 비교/조건 연산식}">
 			boolean이 true일 때, 수행할 내용..
 		</c:if>
 		- 다중조건문
@@ -60,6 +72,8 @@
 			<c:when test="조건2인경우">조건2이  true일때,</c:when>
 			<c:when test="조건3인경우">조건3이  true일때,</c:when>
 			<c:otherwise>위에 조건을 제외한 나머지...</c:otherwise>
+		</c:choose>
+		* 주의 when test 구문은 앞의조건을 제외한 내용이다.
 --%>
    $(document).ready(function(){
       //$("h3").text("시작");
@@ -68,6 +82,25 @@
 </head>
 <body>
 	<c:set var="name" value="홍길동" scope="request"/>
+	<%--
+	# 객체 설정하는 3가지 형식..
+	1. pageContext/request/session/application
+	 --%>
+	 <%
+	 pageContext.setAttribute("m01",new Member());
+	 %>
+	 <c:set target="${m01}" property="id" value="goodman"/>
+	 아이디 : ${m01.id}
+	<%--
+	2. <c:set var="변수명" value="<%=new 객체명()%>"/> 
+	 --%>
+	 <c:set var="m02" value="<%=new Member() %>"/>
+	 <c:set target="${m02 }" property="id" value="higirl"/>
+	 
+	<%--
+	3.<jsp:useBean..
+	 --%>
+	
 	<jsp:useBean id="mem" class="jspexp.z01_vo.Member"></jsp:useBean>
 	<%--property 형식으로 변경 
 		Member mem = new Member(); ==> useBean사용하는것이 이거랑 같음
@@ -97,6 +130,7 @@
 	<jsp:useBean id="pro" class="jspexp.z01_vo.Product"/>
 	<c:set target="${pro}" property="name" value="사과" />
 	<%--
+	위의 내용과 동일하다는뜻 !
 	Product pro = new Product();
 	pro.setName("사과");
 	 --%>

@@ -377,6 +377,7 @@ public class A01_Dao {   //DAO : database access object
       }
       return dlist;
    }
+   
    public ArrayList<Dept> deptList(Dept sch){
 	   ArrayList<Dept> dlist = new ArrayList<Dept>();
 	   //1. 연결
