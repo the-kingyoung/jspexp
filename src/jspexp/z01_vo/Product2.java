@@ -1,5 +1,6 @@
 package jspexp.z01_vo;
-
+//jspexp.z01_vo.Product2
+//  fr_price  to_price
 import java.util.Date;
 
 public class Product2 {

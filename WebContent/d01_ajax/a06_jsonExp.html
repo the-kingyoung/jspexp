@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" 
+   href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+
+	$(document).ready(function() {
+		$("h2").text("json데이터 로딩").click(function() {
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", "z05_json.txt", true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					$("div").eq(0).text(xhr.responseText);
+					//1. 객체로 변경
+					var p01 = eval('('+xhr.responseText+')');
+					console.log(p01);
+					var show="<h3>이름 : "+p01.name+"</h3>";
+					show +="<h3>나이 : "+p01.age+"</h3>";
+					show +="<h3>사는 곳 : "+p01.loc+"</h3>";
+					show +="<h3>결혼유무 : "+(p01.isMarried?"기혼":"미혼")+"</h3>";
+					$("div").eq(1).html(show);
+				}
+			};
+			xhr.send();
+		});
+		//ex) a06_jsonExp.html 	z06_json.txt 물건명 가격 갯수
+		//		물건정보 확인 ==> 클릭시, 물건정보 출력..
+	});
+*/
+//
+   $(document).ready(function(){
+	  $("table").hide();
+      $("h2").text("물건 정보 확인").click(function(){
+    	  var xhr = new XMLHttpRequest();
+    	  xhr.open("get","z06_json.txt",true);
+    	  xhr.onreadystatechange = function(){
+    		  if(xhr.readyState==4&&xhr.status==200){
+    			  
+    			  var prod = eval('('+xhr.responseText+')');
+    			  var show="<h4>물건명 : "+prod.pname+"</h4>";
+    			  show +="<h4>가격 : "+prod.price+"</h4>";
+    			  show +="<h4>갯수 : "+prod.cnt+"</h4>";
+    			  
+    			  $("div").eq(1).html(show);
+    			  $("td").eq(0).text(prod.ㅔname);
+    			  $("td").eq(1).text(prod.price);
+    			  $("td").eq(2).text(prod.cnt);
+    			  //.hide() 사라지게 처리, show() 보이게 처리
+    			  $("table").show();
+    		  }
+    	  };
+    	  xhr.send();
+      });
+   });
+
+	function ajaxFun() {
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "", true);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var prod = eval('('+xhr.responseText+')');
+			}
+		}
+		 xhr.send();
+	}
+</script>
+</head>
+<body>
+   <h2></h2>
+   <div></div>
+   <div></div>
+   <table>
+   	<col width="50%">
+   	<tr><th>물건명</th><td></td></tr>
+   	<tr><th>가격</th><td></td></tr>
+   	<tr><th>갯수</th><td></td></tr>
+   </table>
+</body>

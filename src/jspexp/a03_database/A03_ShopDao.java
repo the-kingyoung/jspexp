@@ -27,6 +27,10 @@ public class A03_ShopDao {
       
 		// 조회 메서드============================================================================================================================
 		public ArrayList<Product2> shopList(Product2 sch) {
+			//null에 대한 default처리..
+			if(sch.getName()==null) sch.setName("");
+			if(sch.getTo_price()==0) sch.setTo_price(9999999);
+			
 			ArrayList<Product2> list = new ArrayList<Product2>();
 			try {
 				setCon();
