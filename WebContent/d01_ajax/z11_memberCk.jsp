@@ -11,3 +11,7 @@
 <jsp:useBean id="dao" class="jspexp.a03_database.A04_MemberDao"></jsp:useBean>
 <c:set var="hasMember" value="${dao.hasMember(param.id) }"/>
 {"hasMember" : ${hasMember}}
+<%--
+{"hasMember" : ${dao.hasMember(param.id)}
+dao의 hasMember()메서드의 리턴값을 boolean이기에 가능하다.
+ --%>

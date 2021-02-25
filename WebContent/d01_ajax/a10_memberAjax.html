@@ -39,6 +39,8 @@
 		xhr.open("get", "z11_memberCk.jsp?" + qstr, true);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
+				//{"hasMember" : true}
+				//문자열 객체 형식을 객체화하여 처리.
 				var ckId = eval('('+xhr.responseText+')')
 				if(ckId.hasMember){
 					$("span").text("등록된 아이디");

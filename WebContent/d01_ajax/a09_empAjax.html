@@ -14,8 +14,9 @@
 //
 	var xhr = new XMLHttpRequest();
 	$(document).ready(function(){
+		//화면에 ename, job를 입력시
 		$("[name=ename],[name=job]").keyup(function(){
-			if(event.keyCode==13){
+			if(event.keyCode==13){ //enter키를 입력했을 때,
 			ajaxFun()
 			}
 		});
@@ -28,6 +29,8 @@
 		xhr.open("get","z09_empList.jsp?"+qstr,true);
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 4 && xhr.status==200){
+				//z09_empList.jsp에서 전송해오는 결과 html 내용을
+				//현재 화면의 div에 출력 처리한다.
 				$("div").html(xhr.responseText);
 			}
 		};
