@@ -8,14 +8,20 @@
 <script type="text/javascript">
 /* 
 # 요청값을 post방식으로 처리.
-1. 요청 페이지와 요청값 호출을 분리 처리.
+1. 요청 페이지와 요청값 호출을 분리 처리하고, 서버단에 파일을 전송시에 활용된다.
+	cf) get/post방식의 차이
+	외부에서는 url주소에 요청값이 들어가면 get방식,
+	url주소에는 페이지만 표시되고, 요청 body안에서 query String으로 요청값을 처리하면 post방식이다.
+	- 보완적인 필요와, 요청값의 데이터가 많을 때 여부에 따라서 구분하여 처리된다.
 2. 추가 속성.
 	open("post","주소",true);
-	sendRequestHeader("Content-Type","application/x-www-form-urlencoded")
+	sendRequestHeader("Content-Type",
+			"application/x-www-form-urlencoded")
+			서버로 전송하는 데이터 형식에 따라서 선언되어야 한다.
 	send("요청1=요청값1&요청2=요청값2")
 
 */
-//
+//	초기에 한개의 인스턴스 객체 만들고, 여러번 활용하려면 상단에 선언하여야 한다.
 	var xhr = new XMLHttpRequest();
 	$(document).ready(function(){
 		$("[name=passwd]").keyup(function(){
@@ -52,13 +58,23 @@
 		var price = $("[name=price]").val();
 		var cnt = $("[name=cnt]").val();
 		var qstr = "pname="+pname+"&price="+price+"&cnt="+cnt;
-		xhr.open("post","z13_exp.jsp?", true);
+		// 페이지 호출과 요청값 전달의 분리.
+		xhr.open("post","z13_exp.jsp", true);
+		// xhr.open("get/post", "url", true/false)
+		// url을 통해서 공공 json 데이터를 받아서 활용할 수 있다.
 		xhr.setRequestHeader("Content-Type",
 				"application/x-www-form-urlencoded");
+		// client에서 server로 데이터를 전송할 때 형식을 선언한다.
+		//	ex) 일반 데이터, 한글데이터, 파일(binary 데이터) 등 여러 형식을 설정하여
+		//		서버에 전송할 수 있다.
+		
+		
 		xhr.onreadystatechange = function(){
 			if(xhr.readyState == 4 && xhr.status == 200){
 				//JSON.parse("문자열형 json 데이터") : 객체로 변환
 				var prod = JSON.parse(xhr.responseText);
+				// 최소한 핵심 데이터만 서버에서 전송하여, 나머지는 client단에
+				// js로 만들어서 출력 처리한다.
 				var show = "<h4>물건명 : "+prod.pname+"</h4>";
 				show += "<h4>가격 : " + prod.price+"</h4>";
 				show += "<h4>갯수 : " + prod.cnt+"</h4>";
@@ -67,6 +83,15 @@
 		};
 		xhr.send(qstr);
 	}
+/*
+# ajax의 최종 정리
+1. 동기/비동기에 따른 처리
+2. 화면 처리 방식에 데이터와 함께 전체 dom 요소객체와 화면을 가져오느냐?
+	json데이터만 가져와서 js로 dom을 만들어가느냐의 차이
+3. get/post 방식의 차이.
+
+
+*/
 </script>
 </head>
 <body>

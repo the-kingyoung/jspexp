@@ -814,12 +814,123 @@ public void deleteEmp(int empno) {
 // ex) emp5
    //public ArrayList<Emp5> elist2(int part){
 
+/*
+1. sql작성
+2. VO 객체 생성 : sql의 결과값에 따른 컬럼명과 type을 확인하여 작성.
+3. 기능 메서드 선언.
+	1) 요청에 의한 입력 : 매개변수로 활용.
+	2) 데이터의 결과에 따라 리턴값 지정.
+		- update, delete, insert : void
+			ex) public void insetEmp(Emp ins)
+		- 단위 변수나 한개의 데이터
+			ex)
+			회원이 등록된 여부
+			public boolean void isMember(String id, String pass)
+			상품의 갯수 : select count(*) from member where...
+			public int memCount(Member sch)
+			회원 상세정보 : select * from member where id=@@@
+			public Member getMember(String id)
+		- 여러개의 데이터
+			ex)
+			공지사항
+			public ArrayList<Board> boardList(Board sch)
+			회원정보리스트
+			public ArrayList<Member> mlist(Member sch)
+			
+		
+*/
+   
+
+   /*
+1. sql작성
+2. VO 객체 생성 : sql의 결과값에 따른 컬럼명과 type을 확인하여 작성.
+3. 기능 메서드 선언.
+	1) 요청에 의한 입력 : 매개변수로 활용.
+	2) 데이터의 결과에 따라 리턴값 지정.
+		- update, delete, insert : void
+			ex) public void insetEmp(Emp ins)
+		- 단위 변수나 한개의 데이터
+			ex)
+			회원이 등록된 여부
+			public boolean void isMember(String id, String pass)
+			상품의 갯수 : select count(*) from member where...
+			public int memCount(Member sch)
+			회원 상세정보 : select * from member where id=@@@
+			public Member getMember(String id)
+		- 여러개의 데이터
+			ex)
+			공지사항
+			public ArrayList<Board> boardList(Board sch)
+			회원정보리스트
+			public ArrayList<Member> mlist(Member sch)
+			
+		
+*/
+   
+   // 조회 처리 메서드.. (매개변수 없는 처리)
+   public ArrayList<Emp> empList3(){
+      ArrayList<Emp> list = new ArrayList<Emp>();
+      // 1. 공통메서드 호출
+      try {
+         setCon();
+      // 2. Statement 객체 생성 (연결객체 - Connection)
+         String sql = "SELECT deptno, max(hiredate) \"date\" ,round(avg(sal),2) \"avgsal\" \r\n"
+         		+ "FROM emp2\r\n"
+         		+ "GROUP BY deptno\r\n"
+         		+ "ORDER BY deptno";
+         stmt = con.createStatement();
+         rs = stmt.executeQuery(sql);
+         int cnt=1;
+         while(rs.next()) {
+        	 
+        	 System.out.print(cnt++ + ":" + rs.getInt(1)+"\t");
+        	 System.out.print(rs.getString("ename")+"\t");
+        	 System.out.print(rs.getString("job")+"\t");
+        	 System.out.print(rs.getInt("mgr")+"\t");
+        	 System.out.print(rs.getDate("hiredate")+"\t");
+        	 System.out.print(rs.getDouble("sal")+"\t");
+        	 System.out.print(rs.getDouble("comm")+"\t");
+        	 System.out.print(rs.getInt("deptno")+"\n");
+        	
+        	 Emp e = new Emp(rs.getInt("empno"),rs.getString(2),
+        			 rs.getString(3),rs.getInt(4),rs.getDate("hiredate"),
+        			 rs.getDouble(6),rs.getDouble(7),rs.getInt(8));
+        	 list.add(e);
+        	 
+         }
+         rs.close();
+         stmt.close();
+         con.close();
+      } catch (SQLException e1) {
+         e1.printStackTrace();
+         System.out.println(e1.getMessage());
+      }catch(Exception e) {
+    	  System.out.println(e.getMessage());
+      }
+   
+      
+      
+      
+      String info = "jdbc:oracle:thin:@localhost:1521:xe";
+      try {
+         con = DriverManager.getConnection(info, "scott", "tiger");
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      System.out.println("접속 성공kk");
+      
+      return list;
+   }
+
 public static void main(String[] args) {
       // TODO Auto-generated method stub
       A01_Dao dao = new A01_Dao();
-      ArrayList<Emp> elist = dao.empList2("","");
-      System.out.println("크기 : "+elist.size());
-      System.out.println("첫번째 : " +elist.get(0).getEname());
+      ArrayList<Emp> elist = dao.empList3();
+      ArrayList<Emp> kk = dao.empList();
+      System.out.println(kk);
+//      System.out.println("크기 : "+elist.size());
+//      System.out.println("첫번째 : " +elist.get(0).getEname());
 //      Emp ins = new Emp(0,"김길동4","대리",7800,"2010/12/12",4000,100,20);
 //      dao.insertEmp(ins);
 		

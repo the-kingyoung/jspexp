@@ -247,6 +247,39 @@ public void deleteDept(int deptno) {
 	}
 }
 
+//=====================================================================================================================	
+public ArrayList<Dept> deptList2(Dept sch){
+	ArrayList<Dept> dlist = new ArrayList<Dept>();
+	try {
+		setCon();
+		String sql="SELECT * \r\n"
+				+ "from dept2 \r\n"
+				+ "WHERE dname LIKE '%'||upper(?)||'%'\r\n"
+				+ "AND loc LIKE '%'||upper(?)||'%'\r\n"
+				+ "ORDER BY deptno DESC";
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, sch.getDname());
+		pstmt.setString(2, sch.getLoc());
+		rs = pstmt.executeQuery();
+		while(rs.next()) {
+			dlist.add(new Dept(rs.getInt(1),rs.getString(2),rs.getString(3)));
+		}
+		System.out.println("데이터크기: "+dlist.size());
+		rs.close();
+		pstmt.close();
+		con.close();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		System.out.println("DB관련예외");
+		System.out.println(e.getMessage());
+	} catch(Exception e) {
+		System.out.println("일반예외");
+		System.out.println(e.getMessage());
+	}
+	return dlist;
+}
+
 	//=====================================================================================================================	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

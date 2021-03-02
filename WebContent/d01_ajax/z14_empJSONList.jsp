@@ -16,3 +16,22 @@
 		<c:if test="${!sts.last}">,</c:if>
 	</c:forEach>
 ]}
+<%--
+# json 데이터 형식
+1. 기본 객체 선언
+	{}
+2. 배열 선언
+	[]
+3. 객체 안에 여러 속성 선언.
+	{"속성":"문자열", "속성":숫자, "속성":boolean, "속성":function(){},
+	"속성":{객체}, "속성":[배열데이터]};
+	
+	ex)
+	{"name":"홍길동", "age":25, "isMarried":false, "show":function(){},
+	"girlfriend":{"name":"김현아","age":24},
+	"friendNames":["이철수","김현우","홍길동"]}
+4. 가져온 데이터 json 유효성 check
+	json validator
+	https://jsonformatter.curiousconcept.com/
+
+--%>

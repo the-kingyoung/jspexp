@@ -1,5 +1,5 @@
 package jspexp.z01_vo;
-
+//jspexp.z01_vo.Dept
 public class Dept {
 	private int deptno;
 	private String dname;

@@ -80,7 +80,8 @@
 			<td>${emp.ename}</td>
 			<td>${emp.job}</td>
 			<td>${emp.mgr}</td>
-			<td>${emp.hiredate}</td>
+			<%--기본 gmt기준으로 현재 나라의 날짜 출력형식으로 출력된다. --%>
+			<td><fmt:formatDate value="${emp.hiredate}"/></td>
 			<td>${emp.sal}</td>
 			<td>${emp.comm}</td>
 			<td>${emp.deptno}</td>
