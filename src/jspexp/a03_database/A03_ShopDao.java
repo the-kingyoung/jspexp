@@ -91,11 +91,11 @@ public class A03_ShopDao {
 		}
       
       // 단일데이터 메서드============================================================================================================================
-		public Product2 getProd(int prono) {
+		public Product2 getProd(int pno) {
 			Product2 pro = null;
 			try {
 				setCon();
-				String sql = "SELECT * FROM product2 WHERE pno=" + prono;
+				String sql = "SELECT * FROM product2 WHERE pno=" + pno;
 				System.out.println("상세조회");
 				System.out.println(sql);
 				stmt=con.createStatement();

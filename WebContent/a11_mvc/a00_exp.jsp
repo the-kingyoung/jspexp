@@ -24,8 +24,19 @@
 
 --%>
 //
-	$(document).ready(function(){
-		$("h3").text("시작");
+
+	$(document).ready(function() {
+		$("#regBtn").on("click", function() {
+			// location.href="${path}/empInsert.do";
+			// # jquery에서는 js코드를 사용가능
+			$(location).attr("href", "${path}/proInsert.do");
+		});
+
+		$(".data").on("dblclick", function() {
+			var pno = $(this).children().eq(0).text();
+			location.href = "${path}/proDetail.do?pno=" + pno;
+
+		});
 	});
 </script>
 </head>
@@ -38,14 +49,15 @@
 			<td><input name="fr_price" value="${param.fr_price}"/>~
 				<input name="to_price" value="${param.to_price}"/>
 			</td></tr>
-		<tr><td colspan="2"> <input type="submit" value="조회"></td></tr>
+		<tr><td colspan="2"> <input type="submit" value="조회">
+		<input type="button" value="등록" id="regBtn"/></td></tr>
 	</table>
 	</form>
 	<table>
 		<tr><th>번호</th><th>물건명</th><th>가격</th><th>갯수</th>
 			<th>등록일</th><th>생산지</th><th>최근입고일</th><th>입고담당자</th></tr>
 			<c:forEach var="prod" items="${plist}">
-			<tr>
+			<tr class="data">
 				<td>${prod.pno}</td>
 				<td>${prod.name}</td>
 				<td>${prod.price}</td>

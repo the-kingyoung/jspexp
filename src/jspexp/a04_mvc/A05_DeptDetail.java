@@ -38,6 +38,9 @@ public class A05_DeptDetail extends HttpServlet {
 		int deptno = Integer.parseInt(deptnoS);
 		
 		A02_DeptDao dao = new A02_DeptDao();
+		
+		
+		
 		request.setAttribute("dept", dao.getDept(deptno));
 		
 		String page = "a11_mvc\\a04_deptDetail.jsp";

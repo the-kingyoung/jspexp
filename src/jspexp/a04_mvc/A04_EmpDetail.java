@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jspexp.a03_database.A01_Dao;
+import jspexp.z01_vo.Emp;
 
 /**
  * Servlet implementation class A04_EmpDetail
@@ -35,16 +36,38 @@ public class A04_EmpDetail extends HttpServlet implements Servlet {
 		request.setCharacterEncoding("utf-8");
 		//1. 요청값 처리
 		//	1) 기본 조회
+		String proc = request.getParameter("proc");
+		
 		String empnoS = request.getParameter("empno");
 		if(empnoS==null) empnoS="0";
 		int empno = Integer.parseInt(empnoS);
-		
+		if(proc!=null&&proc.equals("upt")) {
+
+		}
 		
 		//2. 모델 처리
 		A01_Dao dao = new A01_Dao();
+		if(proc!=null) {
+			if(proc.equals("upt")) {
+				String ename = request.getParameter("ename");
+				String job = request.getParameter("job");
+				String mgr = request.getParameter("mgr");
+				String hiredate_s = request.getParameter("hiredate_s");
+				String sal = request.getParameter("sal");
+				String comm = request.getParameter("comm");
+				String deptno = request.getParameter("deptno");
+				Emp upt = new Emp(empno, ename, job, 
+						  Integer.parseInt(mgr), hiredate_s, 
+						  Double.parseDouble(sal), Double.parseDouble(comm),
+						  Integer.parseInt(deptno) );
+				dao.updateEmp(upt);
+			}
+			if(proc.equals("del")) {
+				System.out.println("삭제준비완료:"+empno);
+				dao.deleteEmp(empno);
+			}
+		}
 		request.setAttribute("emp", dao.getEmp(empno));
-		
-		
 		
 		//3. view 호출
 		String page = "a11_mvc\\a03_empDetail.jsp";

@@ -24,65 +24,59 @@
 
 --%>
 //
-	var proc = "${param.proc}";
+	var proc="${param.proc}";
 	if(proc=="upt"){
 		if(confirm("수정되었습니다.\n조회화면으로 이동하시겠습니까?")){
-			location.href='${path}/emp.do';
+			location.href='${path}/pro.do';
 		}
 	}
 	if(proc=="del"){
 		alert("삭제되었습니다");
-			location.href='${path}/emp.do';
+			location.href='${path}/pro.do';
 	}
-	
+
 	$(document).ready(function(){
 		$("#uptBtn").on("click",function(){
 			if(confirm("수정하시겠습니까?")){
-				// 유효성 check
 				$("[name=proc]").val("upt");
 				$("form").submit();
 			}
 		});
+		
 		$("#delBtn").on("click",function(){
 			if(confirm("삭제하시겠습니까?")){
-				// 유효성 check
 				$("[name=proc]").val("del");
 				$("form").submit();
 			}
 		});
-		
-		
-		
 	});
 </script>
 </head>
 <body>
-   <h3>사원상세정보[${param.empno}]</h3>
-   <form method="post">
-      <input type="hidden" name="proc" value=""/>
+	<h3>상품 상세 정보[${param.pno}]</h3>
+	<form method="post">
+		<input type="hidden" name="proc" value=""/>
 	<table>
-		<c:choose>
-			<c:when test="${not empty emp.ename}">
-				<tr><th>사원번호</th><td><input type="text" name="empno" value="${emp.empno}"></td></tr>
-				<tr><th>사원명</th><td><input type="text" name="ename" value="${emp.ename}"></td></tr>
-				<tr><th>직책</th><td><input type="text" name="job" value="${emp.job}"></td></tr>
-				<tr><th>관리자번호</th><td><input type="text" name="mgr" value="${emp.mgr}"></td></tr>
-				<tr><th>입사일</th><td>
-					<input type="text" name="hiredate_s" value="<fmt:formatDate type='date' pattern='yyyy-MM-dd' 
-								value='${emp.hiredate}'/>" placeholder="yyyy-MM-dd"></td></tr>
-				<tr><th>급여</th><td><input type="text" name="sal" value="${emp.sal}"></td></tr>
-				<tr><th>보너스</th><td><input type="text" name="comm" value="${emp.comm}"></td></tr>
-				<tr><th>부서번호</th><td><input type="text" name="deptno" value="${emp.deptno}"></td></tr>
-			</c:when>
+	<c:choose>
+		<c:when test="${not empty pro.name}">
+			<tr><th>상품번호</th><td><input type="text" name="pno" value="${pro.pno}"></td></tr>
+			<tr><th>상품명</th><td><input type="text" name="name" value="${pro.name}"></td></tr>
+			<tr><th>가격</th><td><input type="text" name="price" value="${pro.price}"></td></tr>
+			<tr><th>갯수</th><td><input type="text" name="cnt" value="${pro.cnt}"></td></tr>
+			<tr><th>신규등록일</th><td><input type="text" name="credte" value="${pro.credte}"></td></tr>
+			<tr><th>제조사</th><td><input type="text" name="company" value="${pro.company}"></td></tr>
+			<tr><th>최근등록일</th><td><input type="text" name="incomedate" value="${pro.incomedate}"></td></tr>
+			<tr><th>담당자</th><td><input type="text" name="inmanager" value="${pro.inmanager}"></td></tr>
+		</c:when>
 		<c:otherwise>
-				<tr><td colspan="2">데이터가 없습니다!</td></tr>
+			<tr><td colspan="2">데이터가 없습니다!</td></tr>
 		</c:otherwise>
-		</c:choose>
-				<tr><td colspan="2">
+	</c:choose>
+		<tr><td colspan="2">
 				<input type="button" value="수정" id="uptBtn"/>
 				<input type="button" value="삭제" id="delBtn"/>
 				<input type="button" value="메인페이지이동" 
-					onclick="location.href='${path}/emp.do'"/>
+					onclick="location.href='${path}/pro.do'"/>
 	</table>
 	</form>
 </body>
