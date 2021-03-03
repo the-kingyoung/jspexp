@@ -25,16 +25,23 @@
 --%>
 //
 	$(document).ready(function(){
-
+		var isSuccess="${isSuccess}";
+		if(isSuccess=="false"){
+			alert("${param.id}님 로그인 실패");
+		}
+		$("[name=id]").focus();
 	});
 </script>
 </head>
 <body>
 
 	<h3>로그인 화면</h3>
+	<form method="post">
 	<table>
-		<tr><th>아이디</th><td>${logInfo.id}</td></tr>
-		<tr><th>패스워드</th><td>${logInfo.pass}</td></tr>
+		<tr><th>아이디</th><td><input type="text" name="id"/></td></tr>
+		<tr><th>패스워드</th><td><input type="password" name="pass"/></td></tr>
+		<tr><td colspan="2"><input type="submit" value="로그인"/></td></tr>
 	</table>
+	</form>
 </body>
 </html>

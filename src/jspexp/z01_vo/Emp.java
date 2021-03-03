@@ -20,6 +20,15 @@ public class Emp {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	public Emp(Date hiredate, double sal, int deptno) {
+		super();
+		this.hiredate = hiredate;
+		this.sal = sal;
+		this.deptno = deptno;
+	}
+
+
 	public Emp(int empno, String ename, String job, int mgr, 
 			String hiredate_s, double sal, double comm, int deptno) {
 		super();

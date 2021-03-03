@@ -201,12 +201,69 @@ public class A03_ShopDao {
 				System.out.println("일반 에러 : " + e.getMessage());
 			}
 		}
+		
+		//public ArrayList<Product2> shopList(Product2 sch) {
+		   public ArrayList<Product2> proList(String name, String company){
+		      ArrayList<Product2> plist = new ArrayList<Product2>();
+		      // 1. 공통메서드 호출
+		      try {
+		         setCon();
+		      // 2. Statement 객체 생성 (연결객체 - Connection)
+		         String sql = "SELECT *\r\n"
+		         		+ "FROM PRODUCT2\r\n"
+		         		+ "WHERE name like'%'||'"+name+"'||'%'\r\n"
+		         		+ "AND company like '%'||'"+company+"'||'%'\r\n"
+		         		+ "ORDER BY pno desc";
+		         stmt = con.createStatement();
+		      // 3. ResultSet 객체 생성 (대화객체 - Statement)
+		         rs = stmt.executeQuery(sql);
+		         while(rs.next()) {
+		        	 System.out.print(rs.getInt("pno")+"\t");
+		        	 System.out.print(rs.getString("name")+"\t");
+		        	 System.out.print(rs.getInt("price")+"\t");
+		        	 System.out.print(rs.getInt("cnt")+"\t");
+		        	 System.out.print(rs.getDate("credte")+"\t");
+		        	 System.out.print(rs.getString("company")+"\t");
+		        	 System.out.print(rs.getDate("incomedate")+"\t");
+		        	 System.out.println(rs.getString("inmanager"));
+
+		        	
+		        	 //1. 객체 생성과 할당.
+		        	 Product2 p = new Product2(rs.getInt(1),rs.getString(2),rs.getInt(3),
+		        			 rs.getInt(4),rs.getDate(5),rs.getString(6),rs.getDate(7),
+		        			 rs.getString(8));
+		        	 //2. ArrayList에 할당.
+		        	 plist.add(p);
+		        	 
+		         }
+		         rs.close();
+		         stmt.close();
+		         con.close();
+		      // 5. 예외 처리
+		      } catch (SQLException e1) {
+		         // TODO Auto-generated catch block
+		         e1.printStackTrace();
+		         System.out.println(e1.getMessage());
+		      }catch(Exception e) {
+		    	  System.out.println(e.getMessage());
+		      }
+		
+		      String info = "jdbc:oracle:thin:@localhost:1521:xe";
+		      try {
+		         con = DriverManager.getConnection(info, "scott", "tiger");
+		      } catch (SQLException e) {
+		         // TODO Auto-generated catch block
+		         e.printStackTrace();
+		      }
+		      System.out.println("접속 성공");
+		      
+		      return plist;
+		   }
 
 // 메인============================================================================================================================
    public static void main(String[] args) {
       A03_ShopDao dao = new A03_ShopDao();
-//      	dao.insertProduct(new Product2(10001, "바나나",5000,5,"2021-02-20","바나나농장","2021-02-20","이박사"));
-      dao.updateProduct(new Product2(10007, "수박",5000,5,"2021-02-20","수박농장","2021-02-20","수박사"));
-      
+      ArrayList<Product2> k = new ArrayList<Product2>(dao.proList("",""));
+      System.out.println(k);
    }
 }

@@ -16,7 +16,7 @@ import jspexp.z01_vo.Emp4;
 import jspexp.z01_vo.Emp5;
 import jspexp.z01_vo.Member5;
 import jspexp.z01_vo.jobSalary;
-
+//A01_Dao.empList2
 
 public class A01_Dao {   //DAO : database access object
    // 1. 데이터베이스 연결 처리
@@ -874,27 +874,20 @@ public void deleteEmp(int empno) {
       try {
          setCon();
       // 2. Statement 객체 생성 (연결객체 - Connection)
-         String sql = "SELECT deptno, max(hiredate) \"date\" ,round(avg(sal),2) \"avgsal\" \r\n"
+         String sql = "SELECT deptno, max(hiredate) hiredate, avg(sal) sal\r\n"
          		+ "FROM emp2\r\n"
          		+ "GROUP BY deptno\r\n"
-         		+ "ORDER BY deptno";
+         		+ "ORDER BY deptno asc";
          stmt = con.createStatement();
          rs = stmt.executeQuery(sql);
-         int cnt=1;
          while(rs.next()) {
         	 
-        	 System.out.print(cnt++ + ":" + rs.getInt(1)+"\t");
-        	 System.out.print(rs.getString("ename")+"\t");
-        	 System.out.print(rs.getString("job")+"\t");
-        	 System.out.print(rs.getInt("mgr")+"\t");
         	 System.out.print(rs.getDate("hiredate")+"\t");
         	 System.out.print(rs.getDouble("sal")+"\t");
-        	 System.out.print(rs.getDouble("comm")+"\t");
         	 System.out.print(rs.getInt("deptno")+"\n");
         	
-        	 Emp e = new Emp(rs.getInt("empno"),rs.getString(2),
-        			 rs.getString(3),rs.getInt(4),rs.getDate("hiredate"),
-        			 rs.getDouble(6),rs.getDouble(7),rs.getInt(8));
+        	 
+        	 Emp e = new Emp(rs.getDate(1), rs.getDouble(2),rs.getInt(3));
         	 list.add(e);
         	 
          }

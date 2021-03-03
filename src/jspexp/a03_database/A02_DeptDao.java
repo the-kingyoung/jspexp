@@ -141,7 +141,7 @@ public ArrayList<Dept> deptList2(String dname, String loc){
 	   ArrayList<Dept> dlist = new ArrayList<Dept>();
 	   try {
 		   setCon();
-		   String sql="SELECT * FROM DEPT\r\n"
+		   String sql="SELECT * FROM DEPT10\r\n"
 		   		+ "WHERE dname LIKE '%'||(?)||'%'\r\n"
 		   		+ "AND loc LIKE '%'||(?)||'%'";
 		   
@@ -253,7 +253,7 @@ public ArrayList<Dept> deptList2(Dept sch){
 	try {
 		setCon();
 		String sql="SELECT * \r\n"
-				+ "from dept2 \r\n"
+				+ "from dept10 \r\n"
 				+ "WHERE dname LIKE '%'||upper(?)||'%'\r\n"
 				+ "AND loc LIKE '%'||upper(?)||'%'\r\n"
 				+ "ORDER BY deptno DESC";

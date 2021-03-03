@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" 
+   href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+
+
+*/
+//
+	$(document).ready(function(){
+		//h2를 클릭시, 하단 div에 h3로 numbering이 된 1번째 안녕하세요 계속 추가적으로
+		// 처리되게하고 해당 h3를 클릭시, 배경색상이 노란색으로 변경하게 처리하세요.
+
+		$("h2").text("안녕하세요").click(function(){
+			show += $("div").html("<h3 id='new'>안녕하세요</h3>");
+		});
+		$("body").on("click","#new",function(event){
+			
+		});
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<div></div>
+</body>

@@ -22,6 +22,12 @@ public class Product2 {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Product2(int pno, String name) {
+		super();
+		this.pno = pno;
+		this.name = name;
+	}
+
 	public Product2(int pno, String name, int price, int cnt, Date credte, String company, Date incomedate,
 			String inmanager) {
 		super();
@@ -49,6 +55,7 @@ public class Product2 {
 	}
 	public Product2(String name, int fr_price, int to_price) {
 		super();
+		//name, fr_price, to_price
 		this.name = name;
 		this.fr_price = fr_price;
 		this.to_price = to_price;
