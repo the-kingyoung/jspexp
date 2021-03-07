@@ -32,6 +32,16 @@ public class A04_EmpInsController extends HttpServlet {
 	 #controller 처리
 	 1. 초기화면 호출
 	 2. 등록 처리.
+	 
+	 # 일반적으로 업무 단위로 controller를 하나를 만들고,
+	 1. 기능별 메서드를 선언
+	 	- 조회 메서드 선언
+	 	- 상세화면 처리 메서드 선언
+	 	- 등록 메서드 선언
+	 	
+	 2. 위에 내용은 화면별로 
+	 	<input type="hidden" name="proc" />
+	 	로 js에 마지막에 전송할 때 해당 proc를 명기하여 처리한다.
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub

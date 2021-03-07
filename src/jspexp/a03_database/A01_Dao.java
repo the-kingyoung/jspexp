@@ -266,6 +266,8 @@ public class A01_Dao {   //DAO : database access object
 // 조회 처리 메서드.. (매개변수 있는 처리)
    public ArrayList<Emp> empList2(String ename, String job){
       ArrayList<Emp> list = new ArrayList<Emp>();
+      System.out.println("넘겨진 데이터 : "+ename);
+      System.out.println("넘겨진 데이터 : "+job);
       // 1. 공통메서드 호출
       try {
          setCon();

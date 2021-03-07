@@ -29,13 +29,14 @@ public class A06_ProdDetail extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
+	 * int pno, String name, int price, int cnt, String credteS, String company, String incomedateS,
+			String inmanager
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		
 		String proc = request.getParameter("proc");
-		
 		String pnoS = request.getParameter("pno");
 		if(pnoS==null) pnoS="0";
 		int pno = Integer.parseInt(pnoS);
@@ -48,21 +49,20 @@ public class A06_ProdDetail extends HttpServlet {
 				String name = request.getParameter("name");
 				String price = request.getParameter("price");
 				String cnt = request.getParameter("cnt");
-				String credte = request.getParameter("credte");
+				String credteS = request.getParameter("credteS");
 				String company = request.getParameter("company");
-				String incomedate = request.getParameter("incomedate");
+				String incomedateS = request.getParameter("incomedateS");
 				String inmanager = request.getParameter("inmanager");
-				Product2 pro = new Product2(pno, name, Integer.parseInt(price),
-						Integer.parseInt(cnt),credte, company, incomedate, inmanager);
-				dao.updateProduct(pro);
+				Product2 upt = new Product2(pno,name,Integer.parseInt(price),
+						Integer.parseInt(cnt),credteS,company, incomedateS,inmanager);
+				dao.updateProduct(upt);				
 			}
 			if(proc.equals("del")) {
-				System.out.println("삭제준비완료:"+pno);
+				System.out.println(pno+"가 삭제됩니다.");
 				dao.deleteProduct(pno);
 			}
 		}
 		request.setAttribute("pro", dao.getProd(pno));
-		
 		
 		String page = "a11_mvc\\a00_prodDetail.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(page);

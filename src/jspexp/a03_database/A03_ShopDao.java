@@ -125,15 +125,15 @@ public class A03_ShopDao {
 			try {
 				setCon();
 				con.setAutoCommit(false);
-				String sql = "UPDATE product2\r\n"
-						+ "SET name = ?,\r\n"
-						+ "	price = ?,\r\n"
-						+ "	cnt = ?,\r\n"
-						+ "	credte = to_date(?,'YYYY-MM-DD'),\r\n"
-						+ "	company = ?,\r\n"
-						+ "	INCOMEDTE = to_date(?,'YYYY-MM-DD'),\r\n"
+				String sql = "UPDATE PRODUCT2 \r\n"
+						+ "SET	name=?,\r\n"
+						+ "	price=?,\r\n"
+						+ "	cnt=?,\r\n"
+						+ "	credte=to_date(?,'YYYY-MM-DD'),\r\n"
+						+ "	company=?,\r\n"
+						+ "	incomedate=to_date(?,'YYYY-MM-DD'),\r\n"
 						+ "	inmanager = ?\r\n"
-						+ "WHERE pno = ?";
+						+ "WHERE pno=?";
 				
 				System.out.println("등록 처리");
 				System.out.println(sql);
@@ -259,6 +259,34 @@ public class A03_ShopDao {
 		      
 		      return plist;
 		   }
+
+// 단일데이터 메서드============================================================================================================================
+		public int getMaxPno() {
+			int pno=0;
+			try {
+				setCon();
+				String sql = "SELECT max(pno) FROM product2";
+				System.out.println("최근 pno가져오기.");
+				System.out.println("상세조회");
+				System.out.println(sql);
+				stmt=con.createStatement();
+				rs = stmt.executeQuery(sql);
+				if(rs.next()) {
+					pno = rs.getInt(1);					
+				}
+				rs.close();
+				stmt.close();
+				con.close();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("상세 조회 에러 : "+e.getMessage());
+			}catch(Exception e) {
+				System.out.println("일반 예외 : "+e.getMessage());
+			}
+			return pno;
+		}
 
 // 메인============================================================================================================================
    public static void main(String[] args) {

@@ -29,12 +29,12 @@
 		$("#regBtn").on("click", function() {
 			// location.href="${path}/empInsert.do";
 			// # jquery에서는 js코드를 사용가능
-			$(location).attr("href", "${path}/proInsert.do");
+			$(location).attr("href", "${path}/prodIns.do");
 		});
 
 		$(".data").on("dblclick", function() {
 			var pno = $(this).children().eq(0).text();
-			location.href = "${path}/proDetail.do?pno=" + pno;
+			location.href = "${path}/prodDetail.do?pno=" + pno;
 
 		});
 	});

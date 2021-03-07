@@ -47,7 +47,7 @@ public class A06_ProdController extends HttpServlet {
 		A03_ShopDao dao = new A03_ShopDao();
 		request.setAttribute("plist", dao.shopList(new Product2(name,fr_price,to_price)));
 		//3. view 호출
-		String page="a11_mvc\\a00_exp.jsp";
+		String page="a11_mvc\\a00_prodList.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(page);
 		rd.forward(request, response);
 	}

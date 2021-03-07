@@ -1,6 +1,7 @@
 package jspexp.a04_mvc;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import jspexp.a03_database.A01_Dao;
+import jspexp.z01_vo.Emp;
 
 /**
  * Servlet implementation class A04_EmpController
@@ -37,14 +39,20 @@ public class A04_EmpController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String ename=request.getParameter("ename");
 		String job=request.getParameter("job");
-		System.out.println("## 이름 : "+ename );
-		System.out.println("## 직책 : "+job );
+//		System.out.println("## 이름 : "+ename );
+//		System.out.println("## 직책 : "+job );
 		// 2. 모델
+		//======================service단계 시작(서비스단)============================
 		if(ename==null) ename="";
 		if(job==null) job="";
 		
 		//Db 접속에 메서드를 통해서 모델 데이터 처리..
+		//-----------dao단계 시작
 		A01_Dao dao = new A01_Dao();
+		// dao.empList(ename,job);
+		//-----------dao단계 끝
+		ArrayList<Emp> list = dao.empList(ename,job);
+		//=======================service단계 끝===========================
 		// DB에서 온 ArrayList<Emp>데이터를 모델명을 empList로 선언한다.
 		// 이 모델명 empList는 view단에서 el ${empList}로 활용된다.
 		request.setAttribute("empList", dao.empList(ename, job));
