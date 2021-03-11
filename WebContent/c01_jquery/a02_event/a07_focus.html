@@ -22,7 +22,7 @@
 		$(선택자).blur(function(){
 			처리할 내용.
 		});
-	2) 이벤트 호출
+	2) 이벤트 호출 : 이벤트 강제 호출 처리
 	$(선택자).focus();
 	$(선택자).blur();
 */
@@ -35,6 +35,7 @@
 		$("#target").blur(function(){
 			$(this).css("background","PINK");
 		});
+		//클릭을 통해서, focus이벤트와 동일한 처리를 하게 한다.
 		$("#other").on("click",function(){
 			$("#target").focus();
 		});

@@ -24,6 +24,21 @@
 		
 		$("#sel").change(function(){
 			var num01 = $("#num01").val();
+			/*
+			<select>
+				<option>사과</option>
+				<option>바나나</option>
+				<option>딸기</option>
+				==> option:selected").text()와 $("select").val()
+				동일하다.
+			<select>
+				<option value="c001">사과</option>
+				<option value="c002">바나나</option>
+				<option value="c003">딸기</option>
+				==> option:selected").text()와
+				$("select").val() 다른 값을 가지고 있다.
+				
+			*/
 			var sel = $("#sel>option:selected").text();
 			var sel = $("#sel").val();
 			var num02 = $("#num02").val();

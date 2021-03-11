@@ -1,11 +1,6 @@
 package jspexp.a03_database;
 //jspexp.a03_database.A01_Dao
 import java.sql.*;
-
-
-
-
-
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -17,7 +12,6 @@ import jspexp.z01_vo.Emp5;
 import jspexp.z01_vo.Member5;
 import jspexp.z01_vo.jobSalary;
 //A01_Dao.empList2
-
 public class A01_Dao {   //DAO : database access object
    // 1. 데이터베이스 연결 처리
    private Connection con;
