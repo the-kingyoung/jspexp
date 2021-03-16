@@ -45,7 +45,6 @@ public class myboaderController extends HttpServlet {
 			boardList = dao.boardList(p, 5);
 		}
 		
-		
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("count", c);
 		

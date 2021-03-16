@@ -33,40 +33,41 @@
 	});
 */
 //
-   $(document).ready(function(){
-	  $("table").hide();
-      $("h2").text("물건 정보 확인").click(function(){
-    	  var xhr = new XMLHttpRequest();
-    	  xhr.open("get","z06_json.txt",true);
-    	  xhr.onreadystatechange = function(){
-    		  if(xhr.readyState==4&&xhr.status==200){
-    			  
-    			  var prod = eval('('+xhr.responseText+')');
-    			  var show="<h4>물건명 : "+prod.pname+"</h4>";
-    			  show +="<h4>가격 : "+prod.price+"</h4>";
-    			  show +="<h4>갯수 : "+prod.cnt+"</h4>";
-    			  
-    			  $("div").eq(1).html(show);
-    			  $("td").eq(0).text(prod.ㅔname);
-    			  $("td").eq(1).text(prod.price);
-    			  $("td").eq(2).text(prod.cnt);
-    			  //.hide() 사라지게 처리, show() 보이게 처리
-    			  $("table").show();
-    		  }
-    	  };
-    	  xhr.send();
-      });
-   });
+
+	$(document).ready(function() {
+		$("table").hide();
+		$("h2").text("물건 정보 확인").click(function() {
+			var xhr = new XMLHttpRequest();
+			xhr.open("get", "z06_json.txt", true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+
+					var prod = eval('(' + xhr.responseText + ')');
+					var show = "<h4>물건명 : " + prod.pname + "</h4>";
+					show += "<h4>가격 : " + prod.price + "</h4>";
+					show += "<h4>갯수 : " + prod.cnt + "</h4>";
+
+					$("div").eq(1).html(show);
+					$("td").eq(0).text(prod.ㅔname);
+					$("td").eq(1).text(prod.price);
+					$("td").eq(2).text(prod.cnt);
+					//.hide() 사라지게 처리, show() 보이게 처리
+					$("table").show();
+				}
+			};
+			xhr.send();
+		});
+	});
 
 	function ajaxFun() {
 		var xhr = new XMLHttpRequest();
 		xhr.open("get", "", true);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
-				var prod = eval('('+xhr.responseText+')');
+				var prod = eval('(' + xhr.responseText + ')');
 			}
 		}
-		 xhr.send();
+		xhr.send();
 	}
 </script>
 </head>

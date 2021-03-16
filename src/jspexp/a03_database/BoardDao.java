@@ -152,7 +152,8 @@ public class BoardDao {
 		return cnt;
 	}
 
-	public void updateInfo(UserInfo2 sch){
+	public boolean updateInfo(UserInfo2 sch){
+		boolean success = false;
 		try {
 			setCon();
 			String sql = "UPDATE userInfo2\r\n"
@@ -168,6 +169,7 @@ public class BoardDao {
 			pstmt.setString(4, sch.getAddress());
 			pstmt.setString(5, sch.getId());
 			rs = pstmt.executeQuery();
+			success = rs.next();
 			
 			rs.close();
 			pstmt.close();
@@ -179,6 +181,7 @@ public class BoardDao {
 			System.out.println(e.getMessage());
 		}
 		System.out.println("접속 성공");
+		return success;
 	}
 
 	public static void main(String[] args) {

@@ -19,9 +19,6 @@
 <script src="${path}/a00_com/popper.min.js"></script>
 <script src="${path}/a00_com/bootstrap.min.js"></script>
 <script src="${path}/a00_com/jquery-ui.js"></script>
-<style type="text/css">
-
-</style>
 </head>
 <body>
 
@@ -54,11 +51,11 @@
 							onclick="paging(${status.current})">${status.index}</button>
 					</c:if>
 				</c:forEach>
-				<input type="button" href="#" class="" name="next" value="&raquo;"/>
+				<input type="button" href="#" class="" name="next" value="&raquo;"/><br><br>
+		<a href="myPageStart.jsp" id="gogo"><span class="text">마이페이지 목록</span></a>
+		<a href="" id="gogo"><span class="text">메인 화면</span></a>
 		</div>
 		</form>
-		<a href="myPageStart.jsp" class="goMyInfo"><span class="text">마이페이지 목록</span></a>
-		<a href="myPageStart.jsp" class="goMyInfo"><span class="text">메인 화면</span></a>
 	</div>
 	<script type="text/javascript">
 	function paging(page){

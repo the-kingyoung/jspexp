@@ -10,9 +10,6 @@
 <meta charset="UTF-8">
 <title>Mypage select</title>
 <link type ="text/css" rel="stylesheet" href="${path}/inflearn/proView/cssfile.css">
-<style type="text/css">
-
-</style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
