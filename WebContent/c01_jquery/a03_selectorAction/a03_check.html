@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" 
+   href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+
+
+*/
+//
+	$(document).ready(function(){
+		$("h2").text(":not() Filter Selector");
+		$("input:not(:checked) + span").css("background-color","pink");
+		$("[type=checkbox]").click(function(){
+			//배경색상 초기화
+			$("input + span").css("background-color","");
+			// check가 되지 않은 것만 배경색상을 green으로 변경 처리..
+			$("input:not(:checked)+span").css("background-color","pink");
+		});
+	});
+/*
+ex) 아래와 같이 물건 정보의 합산 처리를 하세요
+장바구니
+[]	사과		3000	2
+[]	바나나	4000	3
+[]	딸기		12000	5
+	총계		==>		checked가 된것만 배경 색상 노란색
+					하단에 총계 계산 처리
+
+ */
+</script>
+</head>
+<body>
+	<h2></h2>
+	<div>
+		<input type="checkbox" name="a">
+		<span>홍길동</span>
+	</div>
+	<div>
+		<input type="checkbox" name="b">
+		<span>이순신</span>
+	</div>
+	<div>
+		<input type="checkbox" name="c" checked="checked">
+		<span>유관순</span>
+	</div>
+</body>
