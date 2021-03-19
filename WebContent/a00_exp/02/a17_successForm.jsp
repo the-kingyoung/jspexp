@@ -34,6 +34,23 @@
 </head>
 <body>
 	<h3>메인페이지</h3>
-	<h4 align="right">${param.id} 로그인 중</h4>
+	<h4 align="right">${mem.id} 로그인 중</h4>
+	<h6>게시판 만들기</h6>
+	<form action="insert.do"><!-- 
+		해당 게시물 등록시 controller에서 다음과 같이 받을 수 있다.
+		String request.getParameter("writer");
+	 -->
+	<!-- 게시물 등록 현재로그인한 사람을 작성자로 할 때.. -->
+		<input type="hidden" name="writer" value="${mem.id}"/>
+		제목 : <input type="text" name="title"/></br>
+		내용 : <input type="text" name="content"/></br>
+		<input type="submit" value="게시물 등록"/></br>
+	</form>
+	<h5>세션값 확인</h5>
+	<h5>${mem.pass}</h5>
+	<h5>${mem.name}</h5>
+	<h5>${mem.point}</h5>
+	<h5>${mem.auth}</h5>
+	<a href="">페이지로 이동</a>
 </body>
 </html>
