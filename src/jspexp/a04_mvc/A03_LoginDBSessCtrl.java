@@ -47,6 +47,7 @@ mvc4.do?id=himan&pass=7777로 controller단에 요청값을 넘기고
       //    2) 입력 후 페이지. - 입력 후 정상일 때 페이지 설정.
       if(id==null) id="";
       if(pass==null) pass="";
+      
       String page = "a32_loginFrm.jsp";
       if(!id.equals("") && !pass.equals("") ) {
          
@@ -58,7 +59,8 @@ mvc4.do?id=himan&pass=7777로 controller단에 요청값을 넘기고
             // DB 연동의 경우, session값을 설정해서 model데이터를 매핑한다.
             // HttpSession session = request.getSession();
             // session.setAttribute("member", dao.login(id,pass));
-            //a00_exp\02\a32_loginFrm.jsp
+            
+            // a00_exp\02\a32_loginFrm.jsp
             HttpSession session = request.getSession();
             session.setAttribute("mem", mem);
             
