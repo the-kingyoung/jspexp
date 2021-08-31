@@ -3,7 +3,7 @@ package baekjoon;
 import java.util.Scanner;
 
 public class baekjoon0001 {
-
+	
 	public static void main(String[] args) {
 		
 		Scanner scan = new Scanner(System.in);
@@ -16,6 +16,7 @@ public class baekjoon0001 {
 		if(A>B) System.out.println(A+">"+B);
 		else if(A<B) System.out.println(A+"<"+B);
 		else System.out.println(A+"=="+B);
+		
 	}
 
 }

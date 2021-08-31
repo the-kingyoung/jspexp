@@ -16,7 +16,7 @@ public class baekjoon0006 {
 			total += i;
 		}
 		System.out.println("1부터 " + a + "까지의 총 합은 " + total);
-
+		
 	}
 
 }
