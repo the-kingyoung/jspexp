@@ -31,4 +31,4 @@ SELECT * FROM MEMBER_NEWLEC ;
 
 SELECT LENGTHB('AB') FROM DUAL;
 SELECT LENGTHB('한글') FROM DUAL;		-- 글자 하나당 3BYTE를 사용했다는 뜻
-SELECT * FROM NLS_DATABASE_PARAMETERS;		-- 각국의 언어가 얼만큼의 바이트를 사용하는지 알수 있다.
+SELECT * FROM NLS_DATABASE_PARAMETERS;		-- 각국의 언어가 얼만큼의 바이트를 사용하는지 알수 있다. 복습
