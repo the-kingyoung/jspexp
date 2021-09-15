@@ -16,7 +16,7 @@ CREATE TABLE MEMBER_NEWLEC
 	ID 			VARCHAR2(50),
 	PWD 		VARCHAR2(50),
 	GENDER		NCHAR(2),		--남성, 여성
-	AGE			NUMBER,
+	AGE			NUMBER(3),
 	BIRTHDAY	CHAR(10),		--2000-01-02
 	PHONE		CHAR(13),		-- 010-1234-2345
 	REGDATE		DATE
@@ -32,3 +32,13 @@ SELECT * FROM MEMBER_NEWLEC ;
 SELECT LENGTHB('AB') FROM DUAL;
 SELECT LENGTHB('한글') FROM DUAL;		-- 글자 하나당 3BYTE를 사용했다는 뜻
 SELECT * FROM NLS_DATABASE_PARAMETERS;		-- 각국의 언어가 얼만큼의 바이트를 사용하는지 알수 있다. 복습
+
+-- LONG		2Gb (char형식)
+-- CLOB		대용량 텍스트 데이터 타입(최대 4Gbyte)
+-- NCLOB	대용량 텍스트 유니코드 데이터 타입(최대 4Gbyte)
+-- 숫자형
+-- NUMBER	정수와 실수를 모두 다룸		(6,6)<- 소수점 6자리까지
+--			아무것도 쓰지 않을 경우 38이 들어간다.
+-- DATE			년,월,일
+-- TIMESTAMP	년,월,일,시,분,초
+------------------------------------------------------------------------------------------
