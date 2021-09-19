@@ -8,7 +8,7 @@ SELECT * FROM MEMBER_NEWLEC;
 -- NCHAR 영어 숫자 뿐만이 아닌 셰계 각국의 언어들이 데이터에 들어올 경우
 
 -- , VARCHAR2, NCHAR, NVARCHAR2
-------------------------------------------------------------------------------------------복습
+------------------------------------------------------------------------------------------
 DROP TABLE MEMBER_NEWLEC ;
 
 CREATE TABLE MEMBER_NEWLEC 
@@ -38,7 +38,7 @@ SELECT * FROM MEMBER_NEWLEC ;
 
 SELECT LENGTHB('AB') FROM DUAL;
 SELECT LENGTHB('한글') FROM DUAL;		-- 글자 하나당 3BYTE를 사용했다는 뜻
-SELECT * FROM NLS_DATABASE_PARAMETERS;		-- 각국의 언어가 얼만큼의 바이트를 사용하는지 알수 있다. 복습
+SELECT * FROM NLS_DATABASE_PARAMETERS;		-- 각국의 언어가 얼만큼의 바이트를 사용하는지 알수 있다.
 
 -- LONG		2Gb (char형식)
 -- CLOB		대용량 텍스트 데이터 타입(최대 4Gbyte)
