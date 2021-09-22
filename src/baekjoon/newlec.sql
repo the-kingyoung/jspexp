@@ -48,4 +48,52 @@ SELECT * FROM NLS_DATABASE_PARAMETERS;		-- 각국의 언어가 얼만큼의 바�
 --			아무것도 쓰지 않을 경우 38이 들어간다.
 -- DATE			년,월,일
 -- TIMESTAMP	년,월,일,시,분,초
------------------------------------------------------------------------------------------- 
+------------------------------------------------------------------------------------------
+SELECT * FROM MEMBER_NEWLEC;
+
+CREATE TABLE notice_newlec
+(
+	ID			NUMBER,
+	TITLE		NVARCHAR2(100),
+	WRITER_ID	NVARCHAR2(50),
+	CONTENT		CLOB,
+	REGDATE		TIMESTAMP,
+	HIT			NUMBER,
+	FILES		NVARCHAR2(1000)
+);
+
+CREATE TABLE ROLE_NEWLEC
+(
+	ID			NVARCHAR2(50),
+	DISCRIPTION	NVARCHAR2(500)
+);
+
+CREATE TABLE COMMENT_NEWLEC
+(
+	ID			NUMBER,
+	CONTENT		NVARCHAR2(2000),
+	REGDATE		TIMESTAMP,
+	WRITER_ID	NVARCHAR2(50),
+	NOTICE_ID	NUMBER
+);
+CREATE TABLE MEMBER_ROLE_NEWLEC
+(
+	MEMBER_ID	NVARCHAR2(50),
+	ROLE_ID		VARCHAR2(50)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
