@@ -18,4 +18,4 @@ SELECT ID "USER ID", NAME, PWD FROM MEMBER_NEWLEC mn ;
 UPDATE MEMBER_NEWLEC SET PWD='222', NAME='손오공' WHERE ID='dragon' ;
 DELETE MEMBER_NEWLEC WHERE ID='test';
 
--- 트랜잭션이란? 업무 실행단위 / 논리 명령단위 / 개념상의	--> commit , rollback 백신
+-- 트랜잭션이란? 업무 실행단위 / 논리 명령단위 / 개념상의	--> commit , rollback 
