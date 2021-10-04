@@ -19,3 +19,12 @@ UPDATE MEMBER_NEWLEC SET PWD='222', NAME='손오공' WHERE ID='dragon' ;
 DELETE MEMBER_NEWLEC WHERE ID='test';
 
 -- 트랜잭션이란? 업무 실행단위 / 논리 명령단위 / 개념상의	--> commit , rollback 
+
+SELECT HIT+1 FROM NOTICE_NEWLEC nn ;
+SELECT HIT+1 AS HIT FROM notice;
+
+SELECT 1+'3' FROM dual;
+SELECT 1||'3' FROM dual;
+
+SELECT * FROM MEMBER_NEWLEC mn ;
+SELECT NAME||'('||ID||')' AS name FROM MEMBER_NEWLEC mn ;
