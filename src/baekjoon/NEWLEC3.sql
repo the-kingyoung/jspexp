@@ -33,6 +33,8 @@ SELECT * FROM MEMBER_NEWLEC;
 
 
 INSERT INTO NOTICE_NEWLEC(ID, TITLE, WRITER_ID, CONTENT, REGDATE, HIT, FILES)
+
+
 VALUES('7','선반-접시-그릇 이 세가지요~~', 'okay', '연락처를 남깁니다.', sysdate, 23,'');
 
 UPDATE MEMBER_NEWLEC SET NAME = '뉴렉', AGE = 35 WHERE ID = 'newlec';
