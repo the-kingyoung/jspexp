@@ -3,13 +3,23 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
+		<link rel="stylesheet" href="appleCoding.css">
 	</head>
 	<body>
-		<h2 id="hello">안녕하세요</h2>
-		<h2 id="hi">올때메로나</h2>
+	
+		<div class="alert-box" id="alert-box">Alert 박스<button onclick="document.getElementById('alert-box').style.display = 'none';">닫기</button></div>
+		<button onclick="document.getElementById('alert-box').style.display = 'block';">버튼</button>
+	
+<!-- 		<h2 id="hello">안녕하세요</h2> -->
+<!-- 		<h2 id="hi">올때메로나</h2> -->
+
+
+		<script>
+
+		
+	// 		document.getElementById('hello').innerHTML = '안녕';
+	// 		document.getElementById('hello').style.fontSize = '20px';
+	// 		document.getElementById('hi').innerHTML = '올때바밤바';
+		</script>
 	</body>
-	<script>
-		document.getElementById('hello').innerHTML = '안녕';
-		document.getElementById('hi').innerHTML = '올때바밤바';
-	</script>
 </html>
