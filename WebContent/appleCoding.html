@@ -7,19 +7,19 @@
 	</head>
 	<body>
 	
-		<div class="alert-box" id="alert-box">Alert 박스<button onclick="document.getElementById('alert-box').style.display = 'none';">닫기</button></div>
-		<button onclick="document.getElementById('alert-box').style.display = 'block';">버튼</button>
-	
-<!-- 		<h2 id="hello">안녕하세요</h2> -->
-<!-- 		<h2 id="hi">올때메로나</h2> -->
-
-
-		<script>
-
+		<div class="alert-box" id="alert">
+			<p>Alert 박스</p>
+			<button onclick="close()">닫기</button>
+		</div>
+		<button onclick="open()">버튼</button>
+	<script>
+		function close(){
+			document.getElementById('alert').style.display = 'none';
+		};
 		
-	// 		document.getElementById('hello').innerHTML = '안녕';
-	// 		document.getElementById('hello').style.fontSize = '20px';
-	// 		document.getElementById('hi').innerHTML = '올때바밤바';
-		</script>
+		function open(){
+			document.getElementById('alert').style.display = 'block';
+		};
+	</script>
 	</body>
 </html>
